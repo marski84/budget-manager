@@ -1,9 +1,29 @@
-<mat-drawer-container class="example-container">
+<mat-drawer-container class="nav-container">
     <mat-drawer
         mode="side"
         opened
     >
-        Drawer content
     </mat-drawer>
-    <mat-drawer-content>Main content</mat-drawer-content>
+    <mat-drawer-content>
+        <button
+            mat-raised-button
+            routerLink="vertical-chart"
+        >
+            Vertical chart
+        </button>
+    </mat-drawer-content>
+    <mat-drawer-content>
+        <button
+            mat-raised-button
+            routerLink="pie-chart"
+        >
+            Pie chart
+        </button>
+    </mat-drawer-content>
+
 </mat-drawer-container>
+
+<div class="view-container">
+    <router-outlet></router-outlet>
+
+</div>

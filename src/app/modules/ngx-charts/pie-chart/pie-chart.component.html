@@ -1,0 +1,9 @@
+<ngx-charts-pie-chart [results]="data">
+    <ng-template
+        #tooltipTemplate
+        let-model="model"
+    >
+        <h1>{{model.name}}</h1>
+        <h2>{{model.value}}%</h2>
+    </ng-template>
+</ngx-charts-pie-chart>

@@ -1,0 +1,14 @@
+.nav-container{
+  margin-top: 5%;
+  width: 30%;
+}
+
+mat-drawer-content{
+  margin-bottom: 5%;
+}
+
+.view-container{
+ margin-top: 10%;
+ display: flex;
+ justify-content: center;
+}
