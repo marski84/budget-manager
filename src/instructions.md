@@ -44,3 +44,22 @@
 * Musimy wyświetlić loader aplikacji - tzn. Zanim załaduje się aplikacja zazwyczaj mija kila-kilkanaście(lub nawet dziesiąt sekund). Zależnie od wielkości aplikacji oraz szybkości łacza, chcemy więc aby wyświetlił się jakiś pulsujący loader jeszcze przed załadowaniem aplikacji(jako loader wykorzystaj jakiś przykładowy css'owy gotowiec).
 
 ## Przydatne linki
+
+"jest": {
+"preset": "jest-preset-angular",
+"globalSetup": "jest-preset-angular/global-setup",
+"setupFilesAfterEnv": [
+"<rootDir>/src/setupJest.ts"
+],
+"transformIgnorePatterns": [
+"node_modules",
+"@angular",
+"@ngrx",
+"@material",
+"rxjs",
+"ngx-toastr"
+],
+"testMatch": [
+"<rootDir>/src/**/*.spec.ts"
+]
+}
