@@ -1,15 +1,15 @@
-import { Injectable } from '@angular/core';
-import { delay, of } from 'rxjs';
-import { incomesData } from './data/incomes';
-import { outcomesData } from './data/outcomes';
-import {Data} from "@angular/router";
+import {Injectable} from '@angular/core';
+import {delay, of} from 'rxjs';
+import {incomesData} from './data/incomes';
+import {outcomesData} from './data/outcomes';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class AccountingService {
-  incomeData: Data[];
-  outcomeData: any;
+  incomeData: any
+  outcomeData: any
 
   constructor() {
     this.incomeData = incomesData;
@@ -19,6 +19,7 @@ export class AccountingService {
   fetchIncomesData() {
     return of(this.incomeData).pipe(delay(5000));
   }
+
 
   fetchOutcomesData() {
     return of(this.outcomeData).pipe(delay(5000));

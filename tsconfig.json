@@ -23,10 +23,13 @@
       "ES2022",
       "dom"
     ],
+    "esModuleInterop": true,
     "resolveJsonModule": true,
     "paths": {
-      "@app/*": ["src/app/*"]
-    },
+      "@app/*": [
+        "src/app/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

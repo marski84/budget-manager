@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-vertical-bar',
@@ -13,6 +13,8 @@ export class VerticalBarComponent {
   showYAxis = true;
   gradient = false;
   showLegend = true;
+
+
   showXAxisLabel = true;
   xAxisLabel = 'Country';
   showYAxisLabel = true;
@@ -25,11 +27,6 @@ export class VerticalBarComponent {
 
   //pie
   showLabels = true;
-
-  onSelect(event: any) {
-    console.log('ok');
-  }
-
   // data goes here
   public single = [
     {
@@ -57,7 +54,6 @@ export class VerticalBarComponent {
       value: 204617,
     },
   ];
-
   public multi = [
     {
       name: 'China',
@@ -143,4 +139,8 @@ export class VerticalBarComponent {
       ],
     },
   ];
+
+  onSelect(event: any) {
+    console.log('ok');
+  }
 }
