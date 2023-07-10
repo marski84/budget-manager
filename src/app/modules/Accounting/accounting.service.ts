@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { delay, of } from 'rxjs';
 import { incomesData } from './data/incomes';
 import { outcomesData } from './data/outcomes';
+import {Data} from "@angular/router";
 
 @Injectable({
   providedIn: 'root',
 })
 export class AccountingService {
-  incomeData: any;
+  incomeData: Data[];
   outcomeData: any;
 
   constructor() {

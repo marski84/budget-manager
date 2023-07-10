@@ -1,30 +1,9 @@
-export type income = {
-  [key: string]: number;
-};
 
-interface IincomeData {
-  incomes: income;
+export interface Data {
+  [key: string]: {
+    incomes: Income[];
+  };
 }
-
-// {
-//     "incomes": [
-//         {
-//             "Pedicure": 100
-//         },
-//         {
-//             "Manicure": 120
-//         },
-//         {
-//             "Pedicure": 100
-//         },
-//         {
-//             "Schooling": 950
-//         },
-//         {
-//             "Manicure": 120
-//         },
-//         {
-//             "Pedicure": 100
-//         }
-//     ]
-// }
+interface Income {
+  [key: string]: number;
+}
