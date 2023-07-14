@@ -1,1 +1,22 @@
 <!--<app-vertical-bar></app-vertical-bar>-->
+<div class="row">
+  <!-- [scheme]="colorScheme" -->
+  <div *ngIf="incomeData$ | async as resultData">
+    <ngx-charts-bar-vertical
+      (select)="onSelect($event)"
+
+      [gradient]="gradient"
+      [legend]="showLegend"
+      [results]="resultData"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [view]="[700, 400]"
+      [xAxisLabel]="xAxisLabel"
+      [xAxis]="showXAxis"
+      [yAxisLabel]="yAxisLabel"
+      [yAxis]="showYAxis"
+    >
+    </ngx-charts-bar-vertical>
+  </div>
+
+</div>

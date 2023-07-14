@@ -1,9 +1,15 @@
-export interface IncomeData {
-  [key: string]: {
-    incomes: Income[];
-  };
+export interface IncomeItem {
+  [key: string]: number;
 }
 
-interface Income {
-  [key: string]: number;
+export interface MonthIncomeData {
+  incomes: IncomeItem[];
+}
+
+export type Income<T> = {
+  [key: string]: T;
+};
+
+export interface Example {
+  [key: string]: MonthIncomeData
 }

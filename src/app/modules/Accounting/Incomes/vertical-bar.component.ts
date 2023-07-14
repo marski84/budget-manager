@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'app-vertical-bar',
@@ -7,7 +7,8 @@ import {Component} from '@angular/core';
 })
 export class VerticalBarComponent {
   view = [600, 400];
-
+  @Input() data!: any
+  
   // options for the chart
   showXAxis = true;
   showYAxis = true;
