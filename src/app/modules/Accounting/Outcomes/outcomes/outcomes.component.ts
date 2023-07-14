@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AccountingService} from "@app/modules/Accounting/accounting.service";
 
 @Component({
   selector: 'app-outcomes',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OutcomesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private accountingService: AccountingService) {
+  }
 
   ngOnInit() {
+    this.accountingService.fetchOutcomesData().subscribe()
   }
 
 }

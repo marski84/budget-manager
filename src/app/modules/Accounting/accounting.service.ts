@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {delay, map, of} from 'rxjs';
+import {map, of} from 'rxjs';
 import {outcomesData} from './data/outcomes';
 import {incomesData} from "@app/modules/Accounting/data/incomes";
 import {Income} from "@app/modules/Accounting/models/incomeData.interface";
@@ -8,6 +8,17 @@ interface Example {
   [key: string]: {
     incomes: Income<any>[]
   }
+}
+
+// {
+//   January: {
+//     rent: 500,
+//       ingredients: 200,
+//   },
+// },
+
+interface FormatOutcomeDataParams {
+  [key: string]: {}
 }
 
 @Injectable({
@@ -85,16 +96,19 @@ export class AccountingService {
     return of(this.incomeData)
       .pipe(
         // delay(5000),
-        map(data => this.formatIncomeData((data))),
+        map(data => this.formatIncomesData((data))),
         // tap(data => console.log(data))
       );
   }
 
   fetchOutcomesData() {
-    return of(this.outcomeData).pipe(delay(5000));
+    return of(this.outcomeData).pipe(
+      // delay(5000)
+      map(data => this.formatOutcomeData(data))
+    );
   }
 
-  private formatIncomeData(data: Array<Example>) {
+  private formatIncomesData(data: Array<Example>) {
     data.map(record => {
         const key = Object.keys(record);
 
@@ -115,8 +129,32 @@ export class AccountingService {
           value: incomesSum,
           extra: incomes
         }
-        console.log(JSON.stringify(result))
 
+        return JSON.stringify(result);
+      }
+    )
+  }
+
+  private formatOutcomeData(data: FormatOutcomeDataParams[]) {
+    data.map(record => {
+        const key = Object.keys(record);
+
+        const value: any = Object.values(record)[0];
+
+        const outcomes: {}[][] = Object.values(value)
+        console.log(outcomes)
+
+        const outcomesSum = outcomes.reduce((acc: number, outcome) => {
+          const outcomeValue = Number(outcome)
+          acc += outcomeValue
+          return acc
+        }, 0)
+
+        const result = {
+          name: key.join(),
+          value: outcomesSum,
+          extra: outcomes
+        }
         return JSON.stringify(result);
       }
     )
@@ -124,17 +162,3 @@ export class AccountingService {
 }
 
 
-// {
-//       "name": "January",
-//       "value": 2000,
-//       "extra": {
-//         "incomes": [
-//           {"Pedicure": 100},
-//           {"Manicure": 120},
-//           {"Pedicure": 100},
-//           {"Schooling": 950},
-//           {"Manicure": 120},
-//           {"Pedicure": 100},
-//         ],
-//       }
-//     },
