@@ -4,7 +4,7 @@ import {outcomesData} from './data/outcomes';
 import {incomesData} from "@app/modules/Accounting/data/incomes";
 import {Income} from "@app/modules/Accounting/models/incomeData.interface";
 
-interface Example {
+interface IncomeData {
   [key: string]: {
     incomes: Income<any>[]
   }
@@ -25,69 +25,19 @@ interface FormatOutcomeDataParams {
   providedIn: 'root',
 })
 export class AccountingService {
-  incomeData: Example[]
+  incomeData: any
+  // IncomeData[]
   // Income<MonthIncomeData>[]
   outcomeData: any
+  //   {
+  //   [key: string]: {
+  //     rent: number,
+  //     ingredients: number,
+  //     repairments: number,
+  //   }
+  // }
 
   constructor() {
-    // this.incomeData =
-    //   [
-    //
-    //
-    //     {
-    //       "name": "January",
-    //       "value": 2000,
-    //       "extra": {
-    //         "incomes": [
-    //           {"Pedicure": 100},
-    //           {"Manicure": 120},
-    //           {"Pedicure": 100},
-    //           {"Schooling": 950},
-    //           {"Manicure": 120},
-    //           {"Pedicure": 100},
-    //         ],
-    //       }
-    //     },
-    //
-    //
-    //     {
-    //       "name": "Germany",
-    //       "value": 40632,
-    //       "extra": {
-    //         "code": "de"
-    //       }
-    //     },
-    //     {
-    //       "name": "France",
-    //       "value": 36745,
-    //       "extra": {
-    //         "code": "fr"
-    //       }
-    //     },
-    //     {
-    //       "name": "Italy",
-    //       "value": 35800,
-    //       "extra": {
-    //         "code": "it"
-    //       }
-    //     },
-    //     {
-    //       "name": "Kuwait",
-    //       "value": 45260
-    //     },
-    //     {
-    //       "name": "Eritrea",
-    //       "value": 37637
-    //     },
-    //     {
-    //       "name": "Equatorial Guinea",
-    //       "value": 46307
-    //     },
-    //     {
-    //       "name": "Serbia",
-    //       "value": 26427
-    //     }
-    //   ]
     this.incomeData = incomesData
     this.outcomeData = outcomesData;
   }
@@ -108,14 +58,11 @@ export class AccountingService {
     );
   }
 
-  private formatIncomesData(data: Array<Example>) {
-    data.map(record => {
+  private formatIncomesData(data: Array<IncomeData>) {
+    return data.map(record => {
         const key = Object.keys(record);
-
         const value: any = Object.values(record)[0];
-        console.log(Object.values(value))
         const incomes: {}[][] = Object.values(value)
-        console.log(incomes[0])
 
         const incomesSum = incomes[0].reduce((acc: number, income) => {
           const incomeValue = Number(Object.values(income).join())
@@ -123,20 +70,18 @@ export class AccountingService {
           return acc
         }, 0)
 
-
         const result = {
           name: key.join(),
           value: incomesSum,
           extra: incomes
         }
-
-        return JSON.stringify(result);
+        return result
       }
     )
   }
 
   private formatOutcomeData(data: FormatOutcomeDataParams[]) {
-    data.map(record => {
+    return data.map(record => {
         const key = Object.keys(record);
 
         const value: any = Object.values(record)[0];
@@ -155,7 +100,7 @@ export class AccountingService {
           value: outcomesSum,
           extra: outcomes
         }
-        return JSON.stringify(result);
+        return result
       }
     )
   }

@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {AccountingService} from '../../accounting.service';
-import {tap} from 'rxjs';
 
 @Component({
   selector: 'app-incomes',
@@ -8,7 +7,11 @@ import {tap} from 'rxjs';
   styleUrls: ['./incomes.component.css'],
 })
 export class IncomesComponent implements OnInit {
-  incomeData$ = this.accountingService.fetchIncomesData().pipe(tap(data => console.log(data)));
+  incomeData$ =
+    this.accountingService.fetchIncomesData();
+  dataToDisplay: any = ''
+  toolTipTemplate = ''
+  incomeData: any
   // options for the chart
   showXAxis = true;
   showYAxis = true;
@@ -23,25 +26,24 @@ export class IncomesComponent implements OnInit {
     domain: ['#9370DB', '#87CEFA', '#FA8072', '#FF7F50', '#90EE90', '#9370DB'],
   };
 
+
   constructor(private accountingService: AccountingService) {
+
   }
 
   ngOnInit() {
-    // this.accountingService
-    //   .fetchIncomesData()
-    //   .pipe(tap((data) => console.log(data)))
-    //   .subscribe();
+
   }
 
-  onSelect(event: Event) {
+  onActivate(event: { value: { extra: [] } }) {
     console.log(event)
+    // this.toolTipTemplate = `<div>okok</div>`
+    this.dataToDisplay = event.value.extra
+    console.log(this.dataToDisplay[0][0])
+    this.toolTipTemplate = `${this.dataToDisplay[0][0]}`
+
+
   }
 
-  getData() {
-    this.accountingService
-      .fetchIncomesData()
-      .pipe(tap((data) => console.log(data)))
-      .subscribe();
-  }
 
 }

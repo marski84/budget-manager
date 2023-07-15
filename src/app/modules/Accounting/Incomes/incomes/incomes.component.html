@@ -3,11 +3,13 @@
   <!-- [scheme]="colorScheme" -->
   <div *ngIf="incomeData$ | async as resultData">
     <ngx-charts-bar-vertical
-      (select)="onSelect($event)"
-
+      (activate)="onActivate($event)"
       [gradient]="gradient"
       [legend]="showLegend"
+      [matTooltipPosition]="'above'"
+      [matTooltip]=toolTipTemplate
       [results]="resultData"
+      [showDataLabel]="true"
       [showXAxisLabel]="showXAxisLabel"
       [showYAxisLabel]="showYAxisLabel"
       [view]="[700, 400]"
@@ -15,8 +17,10 @@
       [xAxis]="showXAxis"
       [yAxisLabel]="yAxisLabel"
       [yAxis]="showYAxis"
+
     >
     </ngx-charts-bar-vertical>
-  </div>
 
+
+  </div>
 </div>
