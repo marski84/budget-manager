@@ -10,13 +10,6 @@ interface IncomeData {
   }
 }
 
-// {
-//   January: {
-//     rent: 500,
-//       ingredients: 200,
-//   },
-// },
-
 interface FormatOutcomeDataParams {
   [key: string]: {}
 }
@@ -73,7 +66,7 @@ export class AccountingService {
         const result = {
           name: key.join(),
           value: incomesSum,
-          extra: incomes
+          extra: incomes[0]
         }
         return result
       }
@@ -98,7 +91,7 @@ export class AccountingService {
         const result = {
           name: key.join(),
           value: outcomesSum,
-          extra: outcomes
+          extra: outcomes[0]
         }
         return result
       }
