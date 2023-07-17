@@ -12,7 +12,7 @@ export class OutcomesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.accountingService.fetchOutcomesData().subscribe()
+    this.accountingService.fetchOutcomesData().subscribe(data => console.log(data))
   }
 
 }
