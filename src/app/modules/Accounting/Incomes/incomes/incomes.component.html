@@ -1,26 +1,9 @@
-<!--<app-vertical-bar></app-vertical-bar>-->
+<!-- <app-vertical-bar></app-vertical-bar> -->
 <div class="row">
   <!-- [scheme]="colorScheme" -->
   <div *ngIf="incomeData$ | async as resultData">
-    <ngx-charts-bar-vertical
-      (activate)="onActivate($event)"
-      [gradient]="gradient"
-      [legend]="showLegend"
-      [matTooltipPosition]="'above'"
-      [matTooltip]=toolTipDisplayData
-      [results]="resultData"
-      [showDataLabel]="true"
-      [showXAxisLabel]="showXAxisLabel"
-      [showYAxisLabel]="showYAxisLabel"
-      [view]="[700, 400]"
-      [xAxisLabel]="xAxisLabel"
-      [xAxis]="showXAxis"
-      [yAxisLabel]="yAxisLabel"
-      [yAxis]="showYAxis"
-
-    >
-    </ngx-charts-bar-vertical>
-
+    
+    <app-vertical-bar [resultData]="resultData"></app-vertical-bar>
 
   </div>
 </div>

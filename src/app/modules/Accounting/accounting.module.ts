@@ -1,11 +1,11 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 import {MaterialModule} from '../material/material.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {IncomesComponent} from './Incomes/incomes/incomes.component';
 import {OutcomesComponent} from './Outcomes/outcomes/outcomes.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {ChartsModule} from "@app/modules/charts/charts.module";
+import {SharedModule} from "@app/modules/shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -13,13 +13,15 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     OutcomesComponent,
   ],
   imports: [
-    CommonModule,
     MaterialModule,
     BrowserAnimationsModule,
-    NgxChartsModule,
+    // NgxChartsModule,
     MatTooltipModule,
+    ChartsModule,
+    SharedModule
   ],
   exports: [IncomesComponent, OutcomesComponent],
+
 })
 export class AccountingModule {
 }
