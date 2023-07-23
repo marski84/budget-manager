@@ -1,4 +1,4 @@
-interface Outcome {
+export interface Outcome {
   [key: string]: number;
 }
 

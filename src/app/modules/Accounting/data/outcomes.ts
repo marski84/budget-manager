@@ -1,4 +1,6 @@
-export const outcomesData = [
+import {OutcomeData} from "@app/modules/Accounting/models/outcomesData.interface";
+
+export const outcomesData: OutcomeData[] = [
   {
     January: {
       rent: 500,

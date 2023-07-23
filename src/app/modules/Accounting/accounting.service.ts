@@ -1,15 +1,9 @@
 import {Injectable} from '@angular/core';
 import {map, Observable, of} from 'rxjs';
-import {outcomesData} from './data/outcomes';
 import {incomesData} from "@app/modules/Accounting/data/incomes";
+import {IncomesData} from "@app/modules/Accounting/models/incomesData.interface";
+import {outcomesData} from "@app/modules/Accounting/data/outcomes";
 
-export interface IncomeData {
-  [month: string]: {
-    incomes: {
-      [key: string]: number;
-    }[];
-  };
-}
 
 interface FormatOutcomeDataParams {
   [key: string]: {};
@@ -19,37 +13,25 @@ interface FormatOutcomeDataParams {
   providedIn: 'root',
 })
 export class AccountingService {
-  // IncomeData[]
-  // Income<MonthIncomeData>[]
-  outcomeData: any;
-  //   {
-  //   [key: string]: {
-  //     rent: number,
-  //     ingredients: number,
-  //     repairments: number,
-  //   }
-  // }
 
   constructor() {
-    this.outcomeData = outcomesData;
   }
 
   fetchIncomesData(): Observable<any> {
     return of(incomesData).pipe(
       // delay(5000),
       map((data) => this.formatIncomesData(data))
-      // tap(data => console.log(data))
     );
   }
 
   fetchOutcomesData() {
-    return of([]).pipe(
+    return of(outcomesData).pipe(
       // delay(5000)
       map((data) => this.formatOutcomeData(data))
     );
   }
 
-  private formatIncomesData(data: Array<IncomeData>) {
+  private formatIncomesData(data: Array<IncomesData>) {
     return data.map((record) => {
       const monthKey = Object.keys(record)[0];
       const incomes = record[monthKey].incomes
@@ -75,7 +57,11 @@ export class AccountingService {
 
       const value: any = Object.values(record)[0];
 
-      const outcomes: {}[][] = Object.values(value);
+      const outcomes = Object.values(record[key[0]])
+      // console.log(outcomes2)
+
+      // const outcomes: {}[][] = Object.values(value);
+      // console.log(outcomes)
 
       const outcomesSum = outcomes.reduce((acc: number, outcome) => {
         const outcomeValue = Number(outcome);
@@ -88,6 +74,8 @@ export class AccountingService {
         value: outcomesSum,
         extra: outcomes,
       };
+
+      console.log(result)
       return result;
     });
   }
