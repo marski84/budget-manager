@@ -1,9 +1,11 @@
-import {Component, ComponentFactoryResolver, Inject, OnInit, ViewContainerRef} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AccountingService} from '../../accounting.service';
 import {IverticalBarConfig} from "@app/modules/charts/models/vertical-bar-config.interface";
 import {CONFIG} from "@app/modules/shared/CONFIG";
-import {MatDialog} from "@angular/material/dialog";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {CustomDialogComponent} from "@app/modules/Accounting/Dialogs/custom-dialog/custom-dialog.component";
+import {Observable} from "rxjs";
+import {IncomesData} from "@app/modules/Accounting/models/incomesData.interface";
 
 
 const chartConfig: IverticalBarConfig = {
@@ -28,17 +30,16 @@ const chartConfig: IverticalBarConfig = {
 
 })
 export class IncomesComponent implements OnInit {
-  incomeData$ = this.accountingService.fetchIncomesData();
-  dialoRef: any
+  incomeData$: Observable<IncomesData> = this.accountingService.fetchIncomesData();
+  dialogRef!: MatDialogRef<CustomDialogComponent, any>
 
   // @ViewChild('dialogContent', {read: ViewContainerRef}) dialogContent!: ViewContainerRef
 
   constructor(
-    @Inject(CONFIG) private config: IverticalBarConfig,
     private accountingService: AccountingService,
     private dialog: MatDialog,
-    private componentFactoryResolver: ComponentFactoryResolver,
-    private viewContainerRef: ViewContainerRef
+    // private componentFactoryResolver: ComponentFactoryResolver,
+    // private viewContainerRef: ViewContainerRef
   ) {
   }
 
@@ -46,18 +47,12 @@ export class IncomesComponent implements OnInit {
   }
 
   onActivate(event: { value: { extra: [] } }) {
-    // const regExp = new RegExp(/([[{}"}])/g)
-    // const commRegExp = new RegExp(/,/g)
-    // const dataToDisplay = (JSON.stringify(event.value.extra)
-    //   .replace(regExp, ''))
-    //   .replace(commRegExp, ', \n')
-    //   .replace(']', '')
 
     const dataToDisplay = event.value.extra;
 
-    this.dialoRef = this.dialog.open(CustomDialogComponent, {
+    this.dialogRef = this.dialog.open(CustomDialogComponent, {
       hasBackdrop: false,
-      position: {top: '30%'},
+      position: {top: '10%'},
       data: {
         data: dataToDisplay,
       }
@@ -75,7 +70,7 @@ export class IncomesComponent implements OnInit {
 
   onDeactivate(event: Event) {
     if (event) {
-      this.dialoRef.close();
+      this.dialogRef.close();
       console.log('ok')
 
     }

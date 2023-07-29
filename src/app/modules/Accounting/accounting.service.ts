@@ -58,10 +58,6 @@ export class AccountingService {
       const value: any = Object.values(record)[0];
 
       const outcomes = Object.values(record[key[0]])
-      // console.log(outcomes2)
-
-      // const outcomes: {}[][] = Object.values(value);
-      // console.log(outcomes)
 
       const outcomesSum = outcomes.reduce((acc: number, outcome) => {
         const outcomeValue = Number(outcome);
@@ -72,7 +68,7 @@ export class AccountingService {
       const result = {
         name: key.join(),
         value: outcomesSum,
-        extra: outcomes,
+        extra: value,
       };
 
       console.log(result)

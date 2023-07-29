@@ -1,15 +1,9 @@
 <div class="row">
   <div *ngIf="incomeData$ | async as resultData">
-
     <app-vertical-bar
       (onActivateEmitted)="onActivate($event)"
       (onDeactivateEmitted)="onDeactivate($event)"
       [resultData]="resultData"
     ></app-vertical-bar>
-    <!--     <ng-template #dialogContent> -->
-    <!--       &lt;!&ndash; Your custom content here &ndash;&gt; -->
-    <!--       <p>Content passed through ng-content.</p> -->
-    <!--     </ng-template> -->
-
   </div>
 </div>

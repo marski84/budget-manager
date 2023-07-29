@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {AccountingService} from "@app/modules/Accounting/accounting.service";
 import {IverticalBarConfig} from "@app/modules/charts/models/vertical-bar-config.interface";
 import {CONFIG} from "@app/modules/shared/CONFIG";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {ChartDialogComponent} from "@app/modules/Accounting/Dialogs/chart-dialog/chart-dialog.component";
+import {ChartEventData} from "@app/modules/Accounting/models/ChartEventData.interface";
 
 const chartConfig: IverticalBarConfig = {
   showXAxis: true,
@@ -27,12 +30,31 @@ const chartConfig: IverticalBarConfig = {
 export class OutcomesComponent implements OnInit {
 
   resultData$ = this.accountingService.fetchOutcomesData()
+  private dialogRef!: MatDialogRef<ChartDialogComponent, any>
 
-  constructor(private accountingService: AccountingService) {
+
+  constructor(private accountingService: AccountingService, private dialog: MatDialog,
+  ) {
   }
 
   ngOnInit() {
-    this.accountingService.fetchOutcomesData().subscribe(data => console.log(data))
   }
+
+
+  handleOpenDialog(event: ChartEventData) {
+
+    console.log(event)
+    this.dialogRef = this.dialog.open(ChartDialogComponent, {
+      width: '70%',
+      height: '60%',
+      hasBackdrop: false,
+      data: {
+        name: event.name,
+        value: event.value,
+        extra: event.extra
+      }
+    })
+  }
+
 
 }

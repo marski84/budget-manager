@@ -1,3 +1,3 @@
 <div *ngIf="resultData$ | async as resultData">
-  <app-vertical-bar [resultData]="resultData"></app-vertical-bar>
+  <app-vertical-bar (onSelectEmitted)="handleOpenDialog($event)" [resultData]="resultData"></app-vertical-bar>
 </div>

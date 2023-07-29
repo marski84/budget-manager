@@ -1,7 +1,9 @@
 export interface IncomesData {
   [month: string]: {
-    incomes: {
-      [key: string]: number;
-    }[];
+    incomes: Income[];
   };
+}
+
+export interface Income {
+  [key: string]: number;
 }
