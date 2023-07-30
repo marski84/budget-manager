@@ -1,28 +1,37 @@
 <mat-drawer-container class="nav-container">
-    <mat-drawer
-        mode="side"
-        opened
+  <mat-drawer
+    mode="side"
+    opened
+  >
+  </mat-drawer>
+  <mat-drawer-content>
+    <button
+      mat-raised-button
+      routerLink="incomes"
     >
-    </mat-drawer>
-    <mat-drawer-content>
-        <button
-            mat-raised-button
-            routerLink="incomes"
-        >
-            Incomes
-        </button>
-    </mat-drawer-content>
-    <mat-drawer-content>
-        <button
-            mat-raised-button
-            routerLink="outcomes"
-        >
-            Outcomes
-        </button>
-    </mat-drawer-content>
+      Incomes
+    </button>
+  </mat-drawer-content>
+  <mat-drawer-content>
+    <button
+      mat-raised-button
+      routerLink="outcomes"
+    >
+      Outcomes
+    </button>
+  </mat-drawer-content>
+
+  <mat-drawer-content>
+    <button
+      mat-raised-button
+      routerLink="register-expense"
+    >
+      Register new expense
+    </button>
+  </mat-drawer-content>
 
 </mat-drawer-container>
 
 <div class="view-container">
-    <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
 </div>

@@ -9,6 +9,8 @@ import {SharedModule} from "@app/modules/shared/shared.module";
 import {CustomDialogComponent} from '@app/modules/Accounting/Dialogs/custom-dialog/custom-dialog.component';
 import {ViewValuePipe} from './view-value.pipe';
 import {ChartDialogComponent} from './Dialogs/chart-dialog/chart-dialog.component';
+import {RegisterOutcomeFormComponent} from './Outcomes/register-outcome-form/register-outcome-form.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -17,13 +19,16 @@ import {ChartDialogComponent} from './Dialogs/chart-dialog/chart-dialog.componen
     CustomDialogComponent,
     ViewValuePipe,
     ChartDialogComponent,
+    RegisterOutcomeFormComponent,
   ],
   imports: [
     MaterialModule,
     BrowserAnimationsModule,
     MatTooltipModule,
     ChartsModule,
-    SharedModule
+    ReactiveFormsModule,
+    SharedModule,
+    FormsModule
   ],
   exports: [IncomesComponent, OutcomesComponent],
 
