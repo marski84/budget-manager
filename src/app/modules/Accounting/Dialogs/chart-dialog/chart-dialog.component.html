@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>{{dataToDisplay.title}}</h1>
+<div mat-dialog-content>
+  <ng-container *ngIf="dataToDisplay.dataToDisplay as data">
+    <ngx-charts-pie-chart [results]="data"></ngx-charts-pie-chart>
+
+    {{dataToDisplay| json}}
+  </ng-container>
+
+</div>
+<div mat-dialog-actions>
+  <button (click)="closeDialog()" mat-button>Close</button>
+  <button cdkFocusInitial mat-button>Ok</button>
+</div>
+
+
