@@ -42,8 +42,16 @@ export class OutcomesComponent implements OnInit {
 
 
   handleOpenDialog(event: ChartEventData) {
+    const data = Object.keys(event.extra)
+    const displayToDisplay = data.map((key) => {
+      const value = event.extra[key as any];
 
-    console.log(event)
+      return {
+        name: key,
+        value: value
+      }
+    })
+
     this.dialogRef = this.dialog.open(ChartDialogComponent, {
       width: '70%',
       height: '60%',
@@ -51,7 +59,8 @@ export class OutcomesComponent implements OnInit {
       data: {
         name: event.name,
         value: event.value,
-        extra: event.extra
+        title: 'Monthly expenses details',
+        dataToDisplay: displayToDisplay
       }
     })
   }
