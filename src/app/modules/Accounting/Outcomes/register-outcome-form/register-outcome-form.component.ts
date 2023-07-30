@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, Validators} from "@angular/forms";
 import {AccountingService} from "@app/modules/Accounting/accounting.service";
-import {ExpenseFormInterface} from "@app/modules/Accounting/models/Expense-form.interface";
 
 @Component({
   selector: 'app-register-outcome-form',
@@ -9,6 +8,8 @@ import {ExpenseFormInterface} from "@app/modules/Accounting/models/Expense-form.
   styleUrls: ['./register-outcome-form.component.css']
 })
 export class RegisterOutcomeFormComponent {
+
+  months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
   // FormGroup<ExpenseFormInterface>
   form = this.fb.group({
     month: ['', [Validators.required]],
@@ -19,7 +20,9 @@ export class RegisterOutcomeFormComponent {
   constructor(private fb: FormBuilder, private accountingService: AccountingService) {
   }
 
-  hanleSubmit(form: FormGroup<ExpenseFormInterface>) {
+  hanleSubmit() {
+    console.log(this.form)
+    console.log(this.form.statusChanges.subscribe(status => console.log(status)))
 
   }
 
