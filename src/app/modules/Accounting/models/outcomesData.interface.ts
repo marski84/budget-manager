@@ -5,3 +5,12 @@ export interface Outcome {
 export interface OutcomeData {
   [key: string]: Outcome
 }
+
+export interface newOutcome {
+  expenseAmount: string
+  month: string
+  outcomeType: string
+}
+
+
+

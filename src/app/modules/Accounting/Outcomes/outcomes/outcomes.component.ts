@@ -1,36 +1,23 @@
 import {Component, OnInit} from '@angular/core';
 import {AccountingService} from "@app/modules/Accounting/accounting.service";
-import {IverticalBarConfig} from "@app/modules/charts/models/vertical-bar-config.interface";
 import {CONFIG} from "@app/modules/shared/CONFIG";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {ChartDialogComponent} from "@app/modules/Accounting/Dialogs/chart-dialog/chart-dialog.component";
+import {OutcomesDialogComponent} from "@app/modules/Accounting/Dialogs/outcomes-dialog/outcomes-dialog.component";
 import {ChartEventData} from "@app/modules/Accounting/models/ChartEventData.interface";
+import {outcomesChartConfig} from "@app/modules/Accounting/Outcomes/OutcomesChartConfig";
 
-const chartConfig: IverticalBarConfig = {
-  showXAxis: true,
-  showYAxis: true,
-  gradient: false,
-  showLegend: true,
-  showXAxisLabel: true,
-  xAxisLabel: 'Month',
-  showYAxisLabel: true,
-  yAxisLabel: 'Outcomes',
-  colorScheme: {
-    domain: ['#9370DB', '#87CEFA', '#FA8072', '#FF7F50', '#90EE90', '#9370DB'],
-  }
-}
 
 @Component({
   selector: 'app-outcomes',
   templateUrl: './outcomes.component.html',
   styleUrls: ['./outcomes.component.css'],
-  providers: [{provide: CONFIG, useValue: chartConfig}]
+  providers: [{provide: CONFIG, useValue: outcomesChartConfig}]
 
 })
 export class OutcomesComponent implements OnInit {
 
   resultData$ = this.accountingService.fetchOutcomesData()
-  private dialogRef!: MatDialogRef<ChartDialogComponent, any>
+  private dialogRef!: MatDialogRef<OutcomesDialogComponent, any>
 
 
   constructor(private accountingService: AccountingService, private dialog: MatDialog,
@@ -52,7 +39,19 @@ export class OutcomesComponent implements OnInit {
       }
     })
 
-    this.dialogRef = this.dialog.open(ChartDialogComponent, {
+    // OutcomesDialogComponent.openDialog({
+    //   width: '70%',
+    //   height: '60%',
+    //   hasBackdrop: false,
+    //   data: {
+    //     name: event.name,
+    //     value: event.value,
+    //     title: 'Monthly expenses details',
+    //     dataToDisplay: displayToDisplay
+    //   }
+    // })
+
+    this.dialogRef = this.dialog.open(OutcomesDialogComponent, {
       width: '70%',
       height: '60%',
       hasBackdrop: false,

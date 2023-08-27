@@ -1,4 +1,4 @@
-<form (ngSubmit)="hanleSubmit()" [formGroup]="form">
+<form (ngSubmit)="handleSubmit()" [formGroup]="form">
   <div class="input-container">
     <legend>Expense registration form</legend>
 
@@ -8,7 +8,10 @@
         <mat-select [formControl]="form.controls.month">
           <mat-option *ngFor="let month of months" [value]="month">{{month}}</mat-option>
         </mat-select>
+        <mat-error *ngIf="form.controls.month.hasError('required')">This field is required!</mat-error>
+
       </mat-form-field>
+
     </div>
 
     <div>
@@ -16,6 +19,8 @@
         <mat-label>Outcome type</mat-label>
         <input [formControl]="form.controls.outcomeType" matInput placeholder="Type of outcome" type="text">
       </mat-form-field>
+      <mat-error *ngIf="form.controls.outcomeType.hasError('required')">This field is required!</mat-error>
+
     </div>
 
     <div>
@@ -23,6 +28,8 @@
         <mat-label>Expense amount</mat-label>
         <input [formControl]="form.controls.expenseAmount" matInput placeholder="Amount of expense" type="text">
       </mat-form-field>
+      <mat-error *ngIf="form.controls.expenseAmount.hasError('required')">This field is required!</mat-error>
+
     </div>
 
     <div>

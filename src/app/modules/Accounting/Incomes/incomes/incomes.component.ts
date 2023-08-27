@@ -1,32 +1,18 @@
 import {Component, OnInit} from '@angular/core';
 import {AccountingService} from '../../accounting.service';
-import {IverticalBarConfig} from "@app/modules/charts/models/vertical-bar-config.interface";
 import {CONFIG} from "@app/modules/shared/CONFIG";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {CustomDialogComponent} from "@app/modules/Accounting/Dialogs/custom-dialog/custom-dialog.component";
 import {Observable} from "rxjs";
 import {IncomesData} from "@app/modules/Accounting/models/incomesData.interface";
+import {incomesChartConfig} from "@app/modules/Accounting/Incomes/incomesChartConfig";
 
-
-const chartConfig: IverticalBarConfig = {
-  showXAxis: true,
-  showYAxis: true,
-  gradient: false,
-  showLegend: true,
-  showXAxisLabel: true,
-  xAxisLabel: 'Month',
-  showYAxisLabel: true,
-  yAxisLabel: 'Income',
-  colorScheme: {
-    domain: ['#9370DB', '#87CEFA', '#FA8072', '#FF7F50', '#90EE90', '#9370DB'],
-  }
-}
 
 @Component({
   selector: 'app-incomes',
   templateUrl: './incomes.component.html',
   styleUrls: ['./incomes.component.css'],
-  providers: [{provide: CONFIG, useValue: chartConfig}]
+  providers: [{provide: CONFIG, useValue: incomesChartConfig}]
 
 })
 export class IncomesComponent implements OnInit {
@@ -69,11 +55,10 @@ export class IncomesComponent implements OnInit {
 
 
   onDeactivate(event: Event) {
-    if (event) {
-      this.dialogRef.close();
-      console.log('ok')
-
+    if (!event) {
+      return;
     }
+    this.dialogRef.close();
   }
 }
 

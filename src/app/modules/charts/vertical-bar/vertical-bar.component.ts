@@ -8,11 +8,11 @@ import {CONFIG} from "@app/modules/shared/CONFIG";
   styleUrls: ['./vertical-bar.component.css'],
 })
 export class VerticalBarComponent {
-
+  // otypować na litość Boską :)
   @Input() resultData: any
-  @Output() onActivateEmitted: EventEmitter<any> = new EventEmitter<any>
-  @Output() onDeactivateEmitted: EventEmitter<any> = new EventEmitter<any>
-  @Output() onSelectEmitted: EventEmitter<any> = new EventEmitter<any>
+  @Output() onActivateEmitted: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onDeactivateEmitted: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onSelectEmitted: EventEmitter<any> = new EventEmitter<any>();
   // config za pomocą dependency injection
 
   // options for the chart
@@ -33,7 +33,8 @@ export class VerticalBarComponent {
 
   constructor(
     @Inject(CONFIG) private config: IverticalBarConfig) {
-    console.log(config)
+    // console.log(config)
+    // TODO: rozważ korzystanie z config bezpośrednio
     this.showXAxis = config.showXAxis
     this.showYAxis = config.showYAxisLabel
     this.xAxisLabel = config.xAxisLabel
