@@ -1,8 +1,8 @@
-import { ViewValuePipe } from './view-value.pipe';
+import {RecordDataPipe} from './RecordData.pipe';
 
 describe('ViewValuePipe', () => {
   it('create an instance', () => {
-    const pipe = new ViewValuePipe();
+    const pipe = new RecordDataPipe();
     expect(pipe).toBeTruthy();
   });
 });

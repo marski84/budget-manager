@@ -1,5 +1,5 @@
-import {Component, inject, Inject} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {Component, Inject} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
 import {ChartViewData} from "@app/modules/Accounting/models/ChartViewData";
 import {newOutcome} from "@app/modules/Accounting/models/outcomesData.interface";
 import {AccountingService} from "@app/modules/Accounting/accounting.service";
@@ -13,19 +13,19 @@ class DialogData {
   styleUrls: ['./outcomes-dialog.component.css']
 })
 export class OutcomesDialogComponent {
-  dialog = inject(MatDialog)
+  // dialog = inject(MatDialog)
 
   constructor(
     public dialogRef: MatDialogRef<OutcomesDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public dataToDisplay: ChartViewData,
     private accountingService: AccountingService,
-    // public dialog: MatDialog
+    public dialog: MatDialog
   ) {
   }
 
-  // static openDialog(config: MatDialogConfig) {
-  //   this.dialog.open(OutcomesDialogComponent, config)
-  // }
+  static openDialog(dialog: MatDialog, config: MatDialogConfig) {
+    return dialog.open(OutcomesDialogComponent, config)
+  }
 
 
   closeDialog() {

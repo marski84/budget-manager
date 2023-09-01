@@ -1,7 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {NonNullableFormBuilder, Validators} from "@angular/forms";
+import {FormGroup, NonNullableFormBuilder, Validators} from "@angular/forms";
 import {AccountingService} from "@app/modules/Accounting/accounting.service";
 import {newOutcome} from "@app/modules/Accounting/models/outcomesData.interface";
+import {MONTHS} from "@app/modules/Accounting/Outcomes/months.enum";
+import {ExpenseFormInterface} from "@app/modules/Accounting/models/ExpenseFormInterface";
 
 @Component({
   selector: 'app-register-outcome-form',
@@ -12,10 +14,8 @@ export class RegisterOutcomeFormComponent implements OnInit {
   @Output() formDataEmitted: EventEmitter<newOutcome> = new EventEmitter()
   @Input() selectedMonth?: string
 
-  // TODO: months to enum
-  months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-  // FormGroup<ExpenseFormInterface>
-  form = this.fb.group({
+  months = MONTHS
+  form: FormGroup<ExpenseFormInterface> = this.fb.group({
     month: ['', [Validators.required]],
     outcomeType: ['', [Validators.required]],
     expenseAmount: ['', [Validators.required]]

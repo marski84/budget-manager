@@ -1,5 +1,8 @@
 <div class="row">
+  <app-spinner></app-spinner>
+
   <div *ngIf="incomeData$ | async as resultData">
+
     <app-vertical-bar
       (onActivateEmitted)="onActivate($event)"
       (onDeactivateEmitted)="onDeactivate($event)"

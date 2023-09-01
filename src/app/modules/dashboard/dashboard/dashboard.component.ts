@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {SpinnerService} from "@app/modules/spinner/spinner.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent {
-  constructor() {}
+
+  isLoading$ = this.spinnerService.isLoading$
+
+  constructor(private spinnerService: SpinnerService) {
+  }
+
+  activate() {
+    this.spinnerService.show()
+
+  }
 }

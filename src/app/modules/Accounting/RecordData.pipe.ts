@@ -2,9 +2,9 @@ import {Pipe, PipeTransform} from '@angular/core';
 import {Outcome} from "@app/modules/Accounting/models/outcomesData.interface";
 
 @Pipe({
-  name: 'viewValue'
+  name: 'recordData'
 })
-export class ViewValuePipe implements PipeTransform {
+export class RecordDataPipe implements PipeTransform {
 
   transform(value: Outcome): string {
     const key = Object.keys(value)[0]

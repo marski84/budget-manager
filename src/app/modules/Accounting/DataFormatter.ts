@@ -4,7 +4,7 @@ import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {inject} from "@angular/core";
 import {OutcomesDialogComponent} from "@app/modules/Accounting/Dialogs/outcomes-dialog/outcomes-dialog.component";
 
-export class DataFormatClass {
+export class DataFormatter {
 
   static formatIncomesData(data: Array<IncomesData>) {
     return data.map((record) => {

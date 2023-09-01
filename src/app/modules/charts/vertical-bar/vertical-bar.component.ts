@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Inject, Input, Output} from '@angular/core';
 import {IverticalBarConfig} from "@app/modules/charts/models/vertical-bar-config.interface";
 import {CONFIG} from "@app/modules/shared/CONFIG";
+import {AbstractBarDataInterface} from "@app/modules/Accounting/models/abstractBarData.interface";
 
 @Component({
   selector: 'app-vertical-bar',
@@ -9,7 +10,7 @@ import {CONFIG} from "@app/modules/shared/CONFIG";
 })
 export class VerticalBarComponent {
   // otypować na litość Boską :)
-  @Input() resultData: any
+  @Input() resultData!: AbstractBarDataInterface[]
   @Output() onActivateEmitted: EventEmitter<any> = new EventEmitter<any>();
   @Output() onDeactivateEmitted: EventEmitter<any> = new EventEmitter<any>();
   @Output() onSelectEmitted: EventEmitter<any> = new EventEmitter<any>();
@@ -33,7 +34,6 @@ export class VerticalBarComponent {
 
   constructor(
     @Inject(CONFIG) private config: IverticalBarConfig) {
-    // console.log(config)
     // TODO: rozważ korzystanie z config bezpośrednio
     this.showXAxis = config.showXAxis
     this.showYAxis = config.showYAxisLabel

@@ -1,14 +1,22 @@
-.nav-container{
+.nav-container {
   margin-top: 5%;
   width: 30%;
 }
 
-mat-drawer-content{
+mat-drawer-content {
   margin-bottom: 5%;
 }
 
-.view-container{
- margin-top: 10%;
- display: flex;
- justify-content: center;
+.view-container {
+  margin-top: 10%;
+  display: flex;
+  justify-content: center;
+}
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
 }

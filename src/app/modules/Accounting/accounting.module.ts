@@ -6,12 +6,12 @@ import {OutcomesComponent} from './Outcomes/outcomes/outcomes.component';
 import {ChartsModule} from "@app/modules/charts/charts.module";
 import {SharedModule} from "@app/modules/shared/shared.module";
 import {CustomDialogComponent} from '@app/modules/Accounting/Dialogs/custom-dialog/custom-dialog.component';
-import {ViewValuePipe} from './view-value.pipe';
+import {RecordDataPipe} from './RecordData.pipe';
 import {OutcomesDialogComponent} from '@app/modules/Accounting/Dialogs/outcomes-dialog/outcomes-dialog.component';
 import {RegisterOutcomeFormComponent} from './Outcomes/register-outcome-form/register-outcome-form.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AccountingService} from "@app/modules/Accounting/accounting.service";
-import {AbstractDialogComponent} from './Dialogs/abstract-dialog/abstract-dialog.component';
+import {SpinnerModule} from "@app/modules/spinner/spinner.module";
 
 
 @NgModule({
@@ -19,10 +19,9 @@ import {AbstractDialogComponent} from './Dialogs/abstract-dialog/abstract-dialog
     IncomesComponent,
     OutcomesComponent,
     CustomDialogComponent,
-    ViewValuePipe,
+    RecordDataPipe,
     OutcomesDialogComponent,
     RegisterOutcomeFormComponent,
-    AbstractDialogComponent,
   ],
   imports: [
     MaterialModule,
@@ -30,7 +29,8 @@ import {AbstractDialogComponent} from './Dialogs/abstract-dialog/abstract-dialog
     ChartsModule,
     ReactiveFormsModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    SpinnerModule
   ],
   exports: [IncomesComponent, OutcomesComponent, RegisterOutcomeFormComponent],
   providers: [AccountingService]

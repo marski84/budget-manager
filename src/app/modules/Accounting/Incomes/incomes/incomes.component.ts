@@ -4,8 +4,8 @@ import {CONFIG} from "@app/modules/shared/CONFIG";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {CustomDialogComponent} from "@app/modules/Accounting/Dialogs/custom-dialog/custom-dialog.component";
 import {Observable} from "rxjs";
-import {IncomesData} from "@app/modules/Accounting/models/incomesData.interface";
 import {incomesChartConfig} from "@app/modules/Accounting/Incomes/incomesChartConfig";
+import {AbstractBarDataInterface} from "@app/modules/Accounting/models/abstractBarData.interface";
 
 
 @Component({
@@ -16,8 +16,10 @@ import {incomesChartConfig} from "@app/modules/Accounting/Incomes/incomesChartCo
 
 })
 export class IncomesComponent implements OnInit {
-  incomeData$: Observable<IncomesData> = this.accountingService.fetchIncomesData();
+  incomeData$: Observable<AbstractBarDataInterface[]> = this.accountingService.fetchIncomesData();
   dialogRef!: MatDialogRef<CustomDialogComponent, any>
+
+  isLoading$!: Observable<boolean>
 
   // @ViewChild('dialogContent', {read: ViewContainerRef}) dialogContent!: ViewContainerRef
 
@@ -30,6 +32,7 @@ export class IncomesComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
   onActivate(event: { value: { extra: [] } }) {
