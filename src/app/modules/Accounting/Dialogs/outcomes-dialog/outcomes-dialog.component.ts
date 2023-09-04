@@ -13,7 +13,6 @@ class DialogData {
   styleUrls: ['./outcomes-dialog.component.css']
 })
 export class OutcomesDialogComponent {
-  // dialog = inject(MatDialog)
 
   constructor(
     public dialogRef: MatDialogRef<OutcomesDialogComponent>,

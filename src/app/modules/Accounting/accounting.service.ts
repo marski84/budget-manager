@@ -30,14 +30,15 @@ export class AccountingService {
 
   fetchOutcomesData(): Observable<AbstractBarDataInterface[]> {
     return of(outcomesData).pipe(
-      // delay(5000)
-      map((data) => DataFormatter.formatOutcomeData(data)
-      ))
+      tap(() => this.spinnerService.show()),
+      delay(5000),
+      map((data) => DataFormatter.formatOutcomeData(data),
+      ),
+      finalize(() => this.spinnerService.hide())
+    )
   }
 
   registerNewOutcome(data: newOutcome) {
     console.log(data)
   }
-
-
 }
