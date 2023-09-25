@@ -3,7 +3,9 @@ import {IncomesComponent} from './incomes.component';
 import {AccountingService} from "../../accounting.service";
 import {ComponentFixture, TestBed} from "@angular/core/testing";
 import {of} from "rxjs";
-import { NgxChartsModule } from '@swimlane/ngx-charts';
+import {SharedModule} from "../../../shared/shared.module";
+import {CONFIG} from "../../../shared/CONFIG";
+import {incomesChartConfig} from "../../../Accounting/Incomes/incomesChartConfig";
 
 describe('IncomesComponent', () => {
   let component: IncomesComponent;
@@ -18,8 +20,9 @@ describe('IncomesComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [IncomesComponent],
-      imports: [NgxChartsModule],
-      providers: [{provide: AccountingService, useValue: service}]
+      imports: [SharedModule],
+      providers: [{provide: AccountingService, useValue: service},
+        {provide: CONFIG, useValue: incomesChartConfig}]
     })
       .compileComponents();
 

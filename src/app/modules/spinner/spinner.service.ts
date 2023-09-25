@@ -1,27 +1,24 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, map, scan} from "rxjs";
 
 @Injectable()
 export class SpinnerService {
-  private loading = new BehaviorSubject<boolean>(false)
-  readonly isLoading$ = this.loading.asObservable()
 
-  private totalRequests = 0;
-  private completedRequests = 0;
+  private loading = new BehaviorSubject<number>(0);
+  readonly isLoading$ = this.loading.pipe(
+    scan((count, value) => count + value, 0),
+    map(count => count > 0)
+  );
 
   constructor() {
   }
 
   show() {
-    this.totalRequests++;
-    this.loading.next(true);
+    this.loading.next(1);
   }
 
   hide() {
-    this.completedRequests++;
-
-    if (this.totalRequests === this.completedRequests) {
-      this.loading.next(false);
-    }
+    this.loading.next(-1);
   }
+
 }

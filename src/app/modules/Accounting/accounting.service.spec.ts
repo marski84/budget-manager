@@ -1,16 +1,41 @@
-/* tslint:disable:no-unused-variable */
+import {AccountingService} from '../../modules/Accounting/accounting.service';
+import {SpinnerService} from '../../modules/spinner/spinner.service';
 
-import {inject, TestBed} from '@angular/core/testing';
-import {AccountingService} from './accounting.service';
+describe('AccountingService', () => {
+  let accountingService: AccountingService;
+  let spinnerService: SpinnerService;
 
-describe('Service: Accounting', () => {
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [AccountingService],
+    spinnerService = new SpinnerService();
+    accountingService = new AccountingService(spinnerService);
+  });
+
+  it('should fetch incomes data successfully', (done) => {
+    const expectedData = [{id: 1, name: 'Income 1', value: 100, extra: []},
+      {id: 2, name: 'Income 2', value: 200, extra: []}];
+
+    accountingService.fetchIncomesData().subscribe((data) => {
+      // @ts-ignore
+      setTimeout(
+        () => {
+          expect(data).toEqual(expectedData);
+          expect(spinnerService.isLoading$).toBeFalsy();
+          done();
+        }, 6000
+      )
+
     });
   });
 
-  it('should ...', inject([AccountingService], (service: AccountingService) => {
-    expect(service).toBeTruthy();
-  }));
+  it('should register new outcome', () => {
+    const outcomeData = {
+      id: 1, name: 'New Outcome', expenseAmount: '100',
+      month: 'March', outcomeType: 'test'
+    };
+
+    accountingService.registerNewOutcome(outcomeData);
+
+    // You can add additional assertions here based on your requirements
+    expect(console.log).toHaveBeenCalledWith(outcomeData);
+  });
 });

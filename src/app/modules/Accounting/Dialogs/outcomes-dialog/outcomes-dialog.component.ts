@@ -1,8 +1,8 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogConfig, MatDialogRef} from "@angular/material/dialog";
-import {ChartViewData} from "@app/modules/Accounting/models/ChartViewData";
-import {newOutcome} from "@app/modules/Accounting/models/outcomesData.interface";
-import {AccountingService} from "@app/modules/Accounting/accounting.service";
+import {ChartViewData} from "../../../../modules/Accounting/models/ChartViewData";
+import {newOutcome} from "../../../Accounting/models/outcomesData.interface";
+import {AccountingService} from "../../accounting.service";
 
 class DialogData {
 }

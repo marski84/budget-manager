@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {SpinnerService} from "@app/modules/spinner/spinner.service";
+import {SpinnerService} from "../../../modules/spinner/spinner.service";
 import {Observable} from "rxjs";
 
 @Component({

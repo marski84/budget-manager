@@ -1,8 +1,8 @@
-import {FormatOutcomeDataParams} from "@app/modules/Accounting/models/FormatOutcomeDataParams";
-import {IncomesData} from "@app/modules/Accounting/models/incomesData.interface";
+import {FormatOutcomeDataParams} from "../../modules/Accounting/models/FormatOutcomeDataParams";
+import {IncomesData} from "../../modules/Accounting/models/incomesData.interface";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {inject} from "@angular/core";
-import {OutcomesDialogComponent} from "@app/modules/Accounting/Dialogs/outcomes-dialog/outcomes-dialog.component";
+import {OutcomesDialogComponent} from "../../modules/Accounting/Dialogs/outcomes-dialog/outcomes-dialog.component";
 
 export class DataFormatter {
 

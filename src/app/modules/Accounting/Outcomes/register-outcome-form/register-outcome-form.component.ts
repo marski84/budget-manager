@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormGroup, NonNullableFormBuilder, Validators} from "@angular/forms";
-import {AccountingService} from "@app/modules/Accounting/accounting.service";
+import {AccountingService} from "../../../Accounting/accounting.service";
 import {newOutcome} from "@app/modules/Accounting/models/outcomesData.interface";
 import {MONTHS} from "@app/modules/Accounting/Outcomes/months.enum";
 import {ExpenseFormInterface} from "@app/modules/Accounting/models/ExpenseFormInterface";

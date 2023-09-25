@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {AccountingService} from '../../accounting.service';
-import {CONFIG} from "@app/modules/shared/CONFIG";
+import {CONFIG} from "../../../shared/CONFIG";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {CustomDialogComponent} from "@app/modules/Accounting/Dialogs/custom-dialog/custom-dialog.component";
+import {CustomDialogComponent} from "../../../Accounting/Dialogs/custom-dialog/custom-dialog.component";
 import {Observable} from "rxjs";
-import {incomesChartConfig} from "@app/modules/Accounting/Incomes/incomesChartConfig";
-import {AbstractBarDataInterface} from "@app/modules/Accounting/models/abstractBarData.interface";
+import {incomesChartConfig} from "../../../Accounting/Incomes/incomesChartConfig";
+import {AbstractBarDataInterface} from "../../../Accounting/models/abstractBarData.interface";
 
 
 @Component({

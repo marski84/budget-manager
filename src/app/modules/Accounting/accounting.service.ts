@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {delay, finalize, map, Observable, of, tap} from 'rxjs';
-import {incomesData} from "@app/modules/Accounting/data/incomes";
-import {outcomesData} from "@app/modules/Accounting/data/outcomes";
-import {newOutcome} from "@app/modules/Accounting/models/outcomesData.interface";
-import {DataFormatter} from "@app/modules/Accounting/DataFormatter";
-import {AbstractBarDataInterface} from "@app/modules/Accounting/models/abstractBarData.interface";
-import {SpinnerService} from "@app/modules/spinner/spinner.service";
+import {incomesData} from "../../modules/Accounting/data/incomes";
+import {outcomesData} from "../../modules/Accounting/data/outcomes";
+import {newOutcome} from "../../modules/Accounting/models/outcomesData.interface";
+import {DataFormatter} from "../../modules/Accounting/DataFormatter";
+import {AbstractBarDataInterface} from "../..//modules/Accounting/models/abstractBarData.interface";
+import {SpinnerService} from '../../modules/spinner/spinner.service';
 
 
 @Injectable()
