@@ -8,7 +8,8 @@ module.exports = {
   transformIgnorePatterns: ['node_modules/(?!@angular|@ngrx|@material|rxjs|ngx-toastr|@swimlane/ngx-charts)'],
 
   testMatch: ['<rootDir>/src/**/*.spec.ts'],
-  moduleFileExtensions: ['ts', 'html', 'js'],
+  moduleFileExtensions: ['ts', 'html', 'js', 'json', 'mjs'],
+  resolver: 'jest-preset-angular/build/resolvers/ng-jest-resolver.js',
   // modulePaths: ['<rootDir>/src/app/modules'],
   // moduleDirectories: ["node_modules"],
   moduleNameMapper: {
@@ -17,9 +18,12 @@ module.exports = {
     // '^app/(.*)$': '<rootDir>/src/app/$1',
     // '^assets/(.*)$': '<rootDir>/src/assets/$1',
     // '^environments/(.*)$': '<rootDir>/src/environments/$1',
-    '@app/modules/*': '<rootDir>/src/app/modules/*'
+    '^@/(.*)$': '<rootDir>/$1'
   },
-  transform: {"^.+\\.(ts|tsx)$": "ts-jest"}
+  transform: {
+    '^.+\\.(ts|js|html|jsx|tsx)$': 'jest-preset-angular'
+  }
 
 
 }
+// TypeError: configSet.processWithEsbuild is not a function

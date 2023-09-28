@@ -20,10 +20,7 @@ export class AccountingService {
     return of(incomesData).pipe(
       tap(() => this.spinnerService.show()),
       delay(5000),
-      map((data) => {
-        this.spinnerService.hide()
-        return DataFormatter.formatIncomesData(data)
-      }),
+      map((data) => DataFormatter.formatIncomesData(data)),
       finalize(() => this.spinnerService.hide())
     );
   }
@@ -32,8 +29,7 @@ export class AccountingService {
     return of(outcomesData).pipe(
       tap(() => this.spinnerService.show()),
       delay(5000),
-      map((data) => DataFormatter.formatOutcomeData(data),
-      ),
+      map((data) => DataFormatter.formatOutcomeData(data)),
       finalize(() => this.spinnerService.hide())
     )
   }

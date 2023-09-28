@@ -9,17 +9,11 @@ import {Observable} from "rxjs";
 })
 export class SpinnerComponent implements OnInit {
 
-  isLoading$!: Observable<boolean>;
+  isLoading$: Observable<boolean> = this.spinnerService.isLoading$;
 
   constructor(private spinnerService: SpinnerService
   ) {
   }
 
-  ngOnInit(): void {
-    setTimeout(() => {
-      this.isLoading$ = this.spinnerService.isLoading$
-    })
-  }
-
-
+  ngOnInit(): void {}
 }

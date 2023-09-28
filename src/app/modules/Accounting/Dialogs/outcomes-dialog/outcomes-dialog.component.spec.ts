@@ -2,6 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {OutcomesDialogComponent} from './outcomes-dialog.component';
 import {MatDialogRef} from "@angular/material/dialog";
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('ChartDialogComponent', () => {
   let component: OutcomesDialogComponent;
@@ -10,7 +11,8 @@ describe('ChartDialogComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [OutcomesDialogComponent],
-      providers: [MatDialogRef]
+      providers: [MatDialogRef],
+      schemas: [NO_ERRORS_SCHEMA],
     });
     fixture = TestBed.createComponent(OutcomesDialogComponent);
     component = fixture.componentInstance;

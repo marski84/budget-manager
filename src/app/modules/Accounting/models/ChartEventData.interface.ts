@@ -1,5 +1,5 @@
 export interface ChartEventData {
-  extra: number[],
+  extra: number[], // {[key]: string | number }[]
   label: string
   name: string
   value: number

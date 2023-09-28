@@ -25,10 +25,11 @@ export class RegisterOutcomeFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.selectedMonth) {
-      this.form.controls.month.setValue(this.selectedMonth);
-      this.form.controls.month.disable();
+    if (!this.selectedMonth) {
+      return;
     }
+    this.form.controls.month.setValue(this.selectedMonth);
+    this.form.controls.month.disable();
   }
 
   handleSubmit() {
