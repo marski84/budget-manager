@@ -12,9 +12,7 @@ import {SpinnerService} from '../../modules/spinner/spinner.service';
 export class AccountingService {
 
   constructor(private spinnerService: SpinnerService) {
-
   }
-
 
   fetchIncomesData(): Observable<AbstractBarDataInterface[]> {
     return of(incomesData).pipe(

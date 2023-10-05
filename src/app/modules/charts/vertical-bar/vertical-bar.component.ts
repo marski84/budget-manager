@@ -12,42 +12,21 @@ import {SelectDataInterface} from "@app/modules/shared/selectData.interface";
 })
 export class VerticalBarComponent {
   // otypować na litość Boską :)
+  // otypowane
   @Input() resultData!: AbstractBarDataInterface[]
   @Output() onActivateEmitted: EventEmitter<ActivateDataInterface> = new EventEmitter<ActivateDataInterface>();
   @Output() onDeactivateEmitted: EventEmitter<ActivateDataInterface> = new EventEmitter<ActivateDataInterface>();
-  @Output() onSelectEmitted: EventEmitter<any> = new EventEmitter<any>();
-  // config za pomocą dependency injection
-
-  // options for the chart
-  // chart do modułu
-  showXAxis = true;
-  showYAxis = true;
-  xAxisLabel = '';
-  yAxisLabel = '';
-  showXAxisLabel = true;
-  showYAxisLabel = true;
-  gradient = false;
-  showLegend = true;
-
+  @Output() onSelectEmitted: EventEmitter<SelectDataInterface> = new EventEmitter<SelectDataInterface>();
 
   colorScheme = {
     domain: ['#9370DB', '#87CEFA', '#FA8072', '#FF7F50', '#90EE90', '#9370DB'],
   };
 
   constructor(
-    @Inject(CONFIG) private config: IverticalBarConfig) {
-    // TODO: rozważ korzystanie z config bezpośrednio
-    this.showXAxis = config.showXAxis
-    this.showYAxis = config.showYAxisLabel
-    this.xAxisLabel = config.xAxisLabel
-    this.yAxisLabel = config.yAxisLabel
-    this.gradient = config.gradient
-    this.showLegend = config.showLegend
-    this.colorScheme = config.colorScheme
+    @Inject(CONFIG) public config: IverticalBarConfig) {
   }
 
   onActivate(event: ActivateDataInterface) {
-    console.log(event)
     this.onActivateEmitted.emit(event)
   }
 

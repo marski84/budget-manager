@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {AccountingService} from '../../../Accounting/accounting.service';
 import {CONFIG} from '../../../shared/CONFIG';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 import {OutcomesDialogComponent} from '../../../Accounting/Dialogs/outcomes-dialog/outcomes-dialog.component';
-import {ChartEventData} from '../../models/ChartEventData.interface';
 import {outcomesChartConfig} from '../../../Accounting/Outcomes/OutcomesChartConfig';
 import {Observable} from 'rxjs';
 import {AbstractBarDataInterface} from '../../../Accounting/models/abstractBarData.interface';
+import {SelectDataInterface} from "@app/modules/shared/selectData.interface";
 
 @Component({
   selector: 'app-outcomes',
@@ -17,7 +17,6 @@ import {AbstractBarDataInterface} from '../../../Accounting/models/abstractBarDa
 export class OutcomesComponent implements OnInit {
   resultData$: Observable<AbstractBarDataInterface[]> =
     this.accountingService.fetchOutcomesData();
-  private dialogRef!: MatDialogRef<OutcomesDialogComponent, any>;
 
   constructor(
     private accountingService: AccountingService,
@@ -28,7 +27,7 @@ export class OutcomesComponent implements OnInit {
   ngOnInit() {
   }
 
-  handleOpenDialog(event: ChartEventData) {
+  handleOpenDialog(event: SelectDataInterface) {
     const displayToDisplay = Object.keys(event.extra).map((name) => {
       return {
         name,
