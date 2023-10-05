@@ -6,6 +6,7 @@ import {of} from "rxjs";
 import {SharedModule} from "../../../shared/shared.module";
 import {CONFIG} from "../../../shared/CONFIG";
 import {incomesChartConfig} from "../../../Accounting/Incomes/incomesChartConfig";
+import {CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from "@angular/core";
 
 describe('IncomesComponent', () => {
   let component: IncomesComponent;
@@ -22,7 +23,8 @@ describe('IncomesComponent', () => {
       declarations: [IncomesComponent],
       imports: [SharedModule],
       providers: [{provide: AccountingService, useValue: service},
-        {provide: CONFIG, useValue: incomesChartConfig}]
+        {provide: CONFIG, useValue: incomesChartConfig}],
+      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
     })
       .compileComponents();
 

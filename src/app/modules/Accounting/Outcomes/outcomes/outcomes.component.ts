@@ -1,18 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { AccountingService } from '../../../Accounting/accounting.service';
-import { CONFIG } from '../../../shared/CONFIG';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { OutcomesDialogComponent } from '../../../Accounting/Dialogs/outcomes-dialog/outcomes-dialog.component';
-import { ChartEventData } from '../../models/ChartEventData.interface';
-import { outcomesChartConfig } from '../../../Accounting/Outcomes/OutcomesChartConfig';
-import { Observable } from 'rxjs';
-import { AbstractBarDataInterface } from '../../../Accounting/models/abstractBarData.interface';
+import {Component, OnInit} from '@angular/core';
+import {AccountingService} from '../../../Accounting/accounting.service';
+import {CONFIG} from '../../../shared/CONFIG';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {OutcomesDialogComponent} from '../../../Accounting/Dialogs/outcomes-dialog/outcomes-dialog.component';
+import {ChartEventData} from '../../models/ChartEventData.interface';
+import {outcomesChartConfig} from '../../../Accounting/Outcomes/OutcomesChartConfig';
+import {Observable} from 'rxjs';
+import {AbstractBarDataInterface} from '../../../Accounting/models/abstractBarData.interface';
 
 @Component({
   selector: 'app-outcomes',
   templateUrl: './outcomes.component.html',
   styleUrls: ['./outcomes.component.css'],
-  providers: [{ provide: CONFIG, useValue: outcomesChartConfig }],
+  providers: [{provide: CONFIG, useValue: outcomesChartConfig}],
 })
 export class OutcomesComponent implements OnInit {
   resultData$: Observable<AbstractBarDataInterface[]> =
@@ -22,20 +22,13 @@ export class OutcomesComponent implements OnInit {
   constructor(
     private accountingService: AccountingService,
     private dialog: MatDialog
-  ) {}
+  ) {
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   handleOpenDialog(event: ChartEventData) {
-    // const keys = Object.keys(event.extra);
-    // const displayToDisplay = keys.map((key) => {
-    //   const value = event.extra[key as any];
-
-    //   return {
-    //     name: key,
-    //     value: value,
-    //   };
-    // });
     const displayToDisplay = Object.keys(event.extra).map((name) => {
       return {
         name,
@@ -54,17 +47,5 @@ export class OutcomesComponent implements OnInit {
         dataToDisplay: displayToDisplay,
       },
     });
-
-    // this.dialogRef = this.dialog.open(OutcomesDialogComponent, {
-    //   width: '70%',
-    //   height: '60%',
-    //   hasBackdrop: false,
-    //   data: {
-    //     name: event.name,
-    //     value: event.value,
-    //     title: 'Monthly expenses details',
-    //     dataToDisplay: displayToDisplay
-    //   }
-    // })
   }
 }

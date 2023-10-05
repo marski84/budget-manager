@@ -2,6 +2,8 @@ import {Component, EventEmitter, Inject, Input, Output} from '@angular/core';
 import {IverticalBarConfig} from "@app/modules/charts/models/vertical-bar-config.interface";
 import {CONFIG} from "@app/modules/shared/CONFIG";
 import {AbstractBarDataInterface} from "@app/modules/Accounting/models/abstractBarData.interface";
+import {ActivateDataInterface} from "@app/modules/shared/activateData.interface";
+import {SelectDataInterface} from "@app/modules/shared/selectData.interface";
 
 @Component({
   selector: 'app-vertical-bar',
@@ -11,8 +13,8 @@ import {AbstractBarDataInterface} from "@app/modules/Accounting/models/abstractB
 export class VerticalBarComponent {
   // otypować na litość Boską :)
   @Input() resultData!: AbstractBarDataInterface[]
-  @Output() onActivateEmitted: EventEmitter<any> = new EventEmitter<any>();
-  @Output() onDeactivateEmitted: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onActivateEmitted: EventEmitter<ActivateDataInterface> = new EventEmitter<ActivateDataInterface>();
+  @Output() onDeactivateEmitted: EventEmitter<ActivateDataInterface> = new EventEmitter<ActivateDataInterface>();
   @Output() onSelectEmitted: EventEmitter<any> = new EventEmitter<any>();
   // config za pomocą dependency injection
 
@@ -44,15 +46,16 @@ export class VerticalBarComponent {
     this.colorScheme = config.colorScheme
   }
 
-  onActivate(event: Event) {
+  onActivate(event: ActivateDataInterface) {
+    console.log(event)
     this.onActivateEmitted.emit(event)
   }
 
-  onDeactivate(event: Event) {
+  onDeactivate(event: ActivateDataInterface) {
     this.onDeactivateEmitted.emit(event)
   }
 
-  onSelect(event: Event) {
+  onSelect(event: SelectDataInterface) {
     this.onSelectEmitted.emit(event)
   }
 

@@ -6,6 +6,7 @@ import {CustomDialogComponent} from "../../../Accounting/Dialogs/custom-dialog/c
 import {Observable} from "rxjs";
 import {incomesChartConfig} from "../../../Accounting/Incomes/incomesChartConfig";
 import {AbstractBarDataInterface} from "../../../Accounting/models/abstractBarData.interface";
+import {ActivateDataInterface} from "@app/modules/shared/activateData.interface";
 
 
 @Component({
@@ -19,15 +20,10 @@ export class IncomesComponent implements OnInit {
   incomeData$: Observable<AbstractBarDataInterface[]> = this.accountingService.fetchIncomesData();
   dialogRef!: MatDialogRef<CustomDialogComponent, any>
 
-  isLoading$!: Observable<boolean>
-
-  // @ViewChild('dialogContent', {read: ViewContainerRef}) dialogContent!: ViewContainerRef
 
   constructor(
     private accountingService: AccountingService,
     private dialog: MatDialog,
-    // private componentFactoryResolver: ComponentFactoryResolver,
-    // private viewContainerRef: ViewContainerRef
   ) {
   }
 
@@ -35,8 +31,7 @@ export class IncomesComponent implements OnInit {
 
   }
 
-  onActivate(event: { value: { extra: [] } }) {
-
+  onActivate(event: ActivateDataInterface) {
     const dataToDisplay = event.value.extra;
 
     this.dialogRef = this.dialog.open(CustomDialogComponent, {
@@ -46,18 +41,10 @@ export class IncomesComponent implements OnInit {
         data: dataToDisplay,
       }
     })
-
-
-    // const dialogComponentFactory =
-    //   this.componentFactoryResolver.resolveComponentFactory(OutcomesComponent);
-    // const dialogContent = dialogComponentFactory.create(this.dialogContent.parentInjector);
-    // this.dialogContent.insert(dialogContent.hostView)
-    // @ts-ignore
-
   }
 
 
-  onDeactivate(event: Event) {
+  onDeactivate(event: ActivateDataInterface) {
     if (!event) {
       return;
     }
