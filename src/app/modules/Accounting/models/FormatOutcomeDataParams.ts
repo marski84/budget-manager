@@ -1,3 +1,3 @@
 export interface FormatOutcomeDataParams {
-  [key: string]: {};
+    [key: string]: Object;
 }

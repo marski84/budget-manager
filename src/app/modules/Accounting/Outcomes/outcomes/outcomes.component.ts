@@ -9,42 +9,42 @@ import {AbstractBarDataInterface} from '../../../Accounting/models/abstractBarDa
 import {SelectDataInterface} from "@app/modules/shared/selectData.interface";
 
 @Component({
-  selector: 'app-outcomes',
-  templateUrl: './outcomes.component.html',
-  styleUrls: ['./outcomes.component.css'],
-  providers: [{provide: CONFIG, useValue: outcomesChartConfig}],
+    selector: 'app-outcomes',
+    templateUrl: './outcomes.component.html',
+    styleUrls: ['./outcomes.component.css'],
+    providers: [{provide: CONFIG, useValue: outcomesChartConfig}],
 })
 export class OutcomesComponent implements OnInit {
-  resultData$: Observable<AbstractBarDataInterface[]> =
-    this.accountingService.fetchOutcomesData();
+    resultData$: Observable<AbstractBarDataInterface[]> =
+        this.accountingService.fetchOutcomesData();
 
-  constructor(
-    private accountingService: AccountingService,
-    private dialog: MatDialog
-  ) {
-  }
+    constructor(
+        private accountingService: AccountingService,
+        private dialog: MatDialog
+    ) {
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
-  handleOpenDialog(event: SelectDataInterface) {
-    const displayToDisplay = Object.keys(event.extra).map((name) => {
-      return {
-        name,
-        value: event.extra[name as any],
-      };
-    });
+    handleOpenDialog(event: SelectDataInterface) {
+        const displayToDisplay = Object.keys(event.extra).map((name) => {
+            return {
+                name,
+                value: event.extra[name],
+            };
+        });
 
-    OutcomesDialogComponent.openDialog(this.dialog, {
-      width: '85%',
-      height: '85%',
-      hasBackdrop: false,
-      data: {
-        name: event.name,
-        value: event.value,
-        title: 'Monthly expenses details',
-        dataToDisplay: displayToDisplay,
-      },
-    });
-  }
+        OutcomesDialogComponent.openDialog(this.dialog, {
+            width: '85%',
+            height: '85%',
+            hasBackdrop: false,
+            data: {
+                name: event.name,
+                value: event.value,
+                title: 'Monthly expenses details',
+                dataToDisplay: displayToDisplay,
+            },
+        });
+    }
 }

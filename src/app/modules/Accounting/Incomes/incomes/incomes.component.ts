@@ -18,7 +18,13 @@ import {ActivateDataInterface} from "@app/modules/shared/activateData.interface"
 })
 export class IncomesComponent implements OnInit {
   incomeData$: Observable<AbstractBarDataInterface[]> = this.accountingService.fetchIncomesData();
-  dialogRef!: MatDialogRef<CustomDialogComponent, any>
+  dialogRef!: MatDialogRef<CustomDialogComponent, {
+    data: {
+      data: AbstractBarDataInterface[]
+    },
+    hasBackdrop: boolean,
+    position: { [key: string]: string }
+  }>
 
 
   constructor(

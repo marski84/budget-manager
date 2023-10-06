@@ -37,9 +37,9 @@ export class RegisterOutcomeFormComponent implements OnInit {
       return
     }
 
-    this.formDataEmitted.emit(this.form.getRawValue() as newOutcome);
-    this.form.controls.outcomeType.setValue('')
-    this.form.controls.expenseAmount.setValue('')
-    this.form.markAsPristine()
+    this.formDataEmitted.emit(this.form.getRawValue());
+    this.form.controls.outcomeType.setValue('');
+    this.form.controls.expenseAmount.setValue('');
+    this.form.markAsPristine();
   }
 }
