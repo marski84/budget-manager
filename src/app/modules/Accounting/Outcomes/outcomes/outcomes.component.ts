@@ -27,6 +27,7 @@ export class OutcomesComponent implements OnInit {
     ngOnInit() {
     }
 
+
     handleOpenDialog(event: SelectDataInterface) {
         const displayToDisplay = Object.keys(event.extra).map((name) => {
             return {

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {delay, finalize, map, Observable, of, tap} from 'rxjs';
+import {finalize, map, Observable, of, tap} from 'rxjs';
 import {incomesData} from "../../modules/Accounting/data/incomes";
 import {outcomesData} from "../../modules/Accounting/data/outcomes";
 import {newOutcome} from "../../modules/Accounting/models/outcomesData.interface";
@@ -17,7 +17,7 @@ export class AccountingService {
   fetchIncomesData(): Observable<AbstractBarDataInterface[]> {
     return of(incomesData).pipe(
       tap(() => this.spinnerService.show()),
-      delay(5000),
+      // delay(5000),
       map((data) => DataFormatter.formatIncomesData(data)),
       finalize(() => this.spinnerService.hide())
     );
@@ -26,13 +26,13 @@ export class AccountingService {
   fetchOutcomesData(): Observable<AbstractBarDataInterface[]> {
     return of(outcomesData).pipe(
       tap(() => this.spinnerService.show()),
-      delay(5000),
+      // delay(5000),
       map((data) => DataFormatter.formatOutcomeData(data)),
       finalize(() => this.spinnerService.hide())
     )
   }
 
   registerNewOutcome(data: newOutcome) {
-    console.log(data)
+    return data
   }
 }
