@@ -34,11 +34,12 @@ export class IncomesComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
 
   onActivate(event: ActivateDataInterface) {
     const dataToDisplay = event.value.extra;
+    console.log(dataToDisplay)
+
 
     this.dialogRef = this.dialog.open(CustomDialogComponent, {
       hasBackdrop: false,

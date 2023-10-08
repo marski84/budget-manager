@@ -40,7 +40,6 @@ describe('AccountingService', () => {
     service.fetchIncomesData().subscribe((data) => {
       // then
       expect(data).toEqual(expectedData);
-      console.log(expectedData)
       expect(spy).toHaveBeenCalled();
       done();
     });
