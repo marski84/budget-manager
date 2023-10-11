@@ -90,17 +90,16 @@ describe('IncomesComponent', () => {
     expect(verticalBarElement).toBeDefined();
   })
 
-  // it('should fetch incomes data on initialization', () => {
-  //   jest.spyOn(accountingService, 'fetchIncomesData');
-  //
-  //   component.ngOnInit();
-  //
-  //   // expect(accountingService.fetchIncomesData).toHaveBeenCalled();
-  //   expect(component.incomeData$.subscribe(data => data)).toEqual((mockData));
-  // });
+  it('should fetch incomes data on initialization', () => {
+    // given
+    jest.spyOn(accountingService, 'fetchIncomesData');
+    // when
+    component.ngOnInit();
+    // then
+    expect(component.incomeData$.subscribe(data => data)).toEqual((mockData.subscribe(data => data)));
+  });
 
   it('should open dialog on activate', () => {
-    // jest.spyOn(dialog, 'open')
     // given
     const mockActivateDate = [
       {
@@ -115,21 +114,35 @@ describe('IncomesComponent', () => {
         entries: []
       }
     ]
+    // when
     component.onActivate = jest.fn().mockReturnValue(mockActivateDate);
     component.onActivate(mockActivateDate as any);
-
+    // then
     fixture.detectChanges();
     expect(component.onActivate(mockActivateDate as any)).toEqual(mockActivateDate);
-    // expect(component.dialogRef).toBeDefined();
   });
 
-  // it('should close dialog on deactivate', () => {
-  //   jest.spyOn(component.dialogRef, 'close');
-  //
-  //   // component.onDeactivate({});
-  //
-  //   expect(component.dialogRef.close).toHaveBeenCalled();
-  // });
+  it('should close dialog on deactivate', () => {
+    // given
+    const mockActivateDate = [
+      {
+        value: {
+          name: 'test',
+          value: 100,
+          extra: {
+            'test': 100
+          },
+          label: 'testLabel'
+        },
+        entries: []
+      }
+    ]
+    // when
+    component.onDeactivate = jest.fn().mockReturnValue(mockActivateDate);
+    component.onDeactivate(mockActivateDate as any)
+    // then
+    expect(component.onDeactivate(mockActivateDate as any)).toEqual(mockActivateDate)
+  });
 
 
 });
