@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Inject, Input, Output} from '@angular/core';
-import {IverticalBarConfig} from "@app/modules/charts/models/vertical-bar-config.interface";
-import {CONFIG} from "@app/modules/shared/CONFIG";
-import {AbstractBarDataInterface} from "@app/modules/Accounting/models/abstractBarData.interface";
-import {ActivateDataInterface} from "@app/modules/shared/activateData.interface";
-import {SelectDataInterface} from "@app/modules/shared/selectData.interface";
+import {IverticalBarConfig} from "../../charts/models/vertical-bar-config.interface";
+import {CONFIG} from "../../shared/CONFIG";
+import {AbstractBarDataInterface} from "../../Accounting/models/abstractBarData.interface";
+import {ActivateDataInterface} from "../../shared/activateData.interface";
+import {SelectDataInterface} from "../../shared/selectData.interface";
 
 @Component({
   selector: 'app-vertical-bar',

@@ -37,8 +37,9 @@ export class IncomesComponent implements OnInit {
   }
 
   onActivate(event: ActivateDataInterface) {
+    console.log(event)
+
     const dataToDisplay = event.value.extra;
-    console.log(dataToDisplay)
 
 
     this.dialogRef = this.dialog.open(CustomDialogComponent, {
