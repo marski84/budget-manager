@@ -2,6 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {SpinnerComponent} from '../../../modules/spinner/spinner/spinner.component';
 import {SpinnerService} from "../../../modules/spinner/spinner.service";
+import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 
 describe('SpinnerComponent', () => {
   let component: SpinnerComponent;
@@ -13,7 +14,8 @@ describe('SpinnerComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [SpinnerComponent],
-      providers: [SpinnerService]
+      providers: [SpinnerService],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
     }).compileComponents().then(() => {
         fixture = TestBed.createComponent(SpinnerComponent)
         component = fixture.componentInstance;
@@ -26,45 +28,32 @@ describe('SpinnerComponent', () => {
 
   });
 
-  it('should create', () => {
+  it('should create component', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should initialize isLoading$ after 1 second', (async () => {
+  it('should initialize spinner after show() method is called', (async () => {
+    // given
+    spinnerService.show();
     fixture.detectChanges();
-
-    fixture.whenStable().then(() => {
-        fixture.detectChanges();
-        spinnerService.show();
-        fixture.detectChanges();
-        spinnerService.show();
-
-
-        // expect(compiled).toContain('mat-progress-spinner')
-        // expect(fixture.nativeElement.innerHTML).toContain('<mat-progress-spinner></mat-progress-spinner>')
-        expect(fixture.nativeElement.innerHTML).toContain('dupa')
-
-      }
-    )
-
-
-    component.ngOnInit();
-
+    // when
+    // const spinner = fixture.debugElement.nativeElement.querySelector('mat-progress-spinner');
+    // then
+    expect(fixture.nativeElement.outerHTML).toContain('mat-progress-spinner')
 
   }));
 
-  it('should start spinner when show() method is called', (() => {
+  it('should start hide spinner when hide() method is called', (() => {
     // given
-    component.ngOnInit();
-    // when
     spinnerService.show();
     fixture.detectChanges();
+    // when
+    spinnerService.hide();
+    fixture.detectChanges();
     // then
-    let result
-    spinnerService.isLoading$.subscribe(val => result = val)
-    // @ts-ignore
-    expect(result).toEqual(true);
-
+    // const spinner = fixture.debugElement.nativeElement.querySelector('mat-progress-spinner');
+    // then
+    expect(fixture.nativeElement.outerHTML).not.toContain('mat-progress-spinner')
   }));
 
 
