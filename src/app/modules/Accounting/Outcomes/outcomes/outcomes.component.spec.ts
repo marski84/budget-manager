@@ -1,65 +1,43 @@
 /* tslint:disable:no-unused-variable */
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {OutcomesComponent} from './outcomes.component';
-import {of} from "rxjs";
 import {MatDialog, MatDialogModule} from "@angular/material/dialog";
 import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 import {AccountingService} from "../../accounting.service";
-import {SpinnerService} from "../../../spinner/spinner.service";
 import {outcomesChartConfig} from "../../Outcomes/OutcomesChartConfig";
 import {CONFIG} from "../../../shared/CONFIG";
+import {OutcomesDialogComponent} from "../../Dialogs/outcomes-dialog/outcomes-dialog.component";
 
 describe('OutcomesComponent', () => {
   let component: OutcomesComponent;
   let fixture: ComponentFixture<OutcomesComponent>;
-  let accountingService: AccountingService;
-  let dialog: MatDialog;
 
-  class MatDialogRefMock {
-    close() {
-      return jest.fn()
-    }
+  const dialogMock = {
+    open: jest.fn(),
+    close: jest.fn(),
+  };
 
-    open() {
-      return jest.fn()
-    }
+  const accountingServiceMock = {
+    fetchOutcomesData: jest.fn(),
+    registerNewOutcome: jest.fn()
+  };
 
+  const mockData = {
+    name: 'testData',
+    value: 1000,
+    extra: {
+      test: 1000
+    },
+    label: 'test'
   }
 
-  const mockData = of([{
-    "name": "January",
-    "value": 1490,
-    "extra": [
-      {
-        "Pedicure": 100
-      },
-      {
-        "Manicure": 120
-      },
-      {
-        "Pedicure": 100
-      },
-      {
-        "Schooling": 950
-      },
-      {
-        "Manicure": 120
-      },
-      {
-        "Pedicure": 100
-      }
-    ]
-  }]);
-
-
-  beforeEach(async(() => {
+  beforeEach((() => {
     TestBed.configureTestingModule({
-      declarations: [OutcomesComponent],
+      declarations: [OutcomesComponent, OutcomesDialogComponent],
       imports: [MatDialogModule],
       providers: [
-        {provide: AccountingService, useValue: {fetchOutcomesData: () => of(mockData)}},
-        {provide: SpinnerService, useValue: {show: jest.fn(), hide: jest.fn()}},
-        {provide: MatDialog, useValue: MatDialogRefMock},
+        {provide: AccountingService, useValue: accountingServiceMock},
+        {provide: MatDialog, useValue: dialogMock},
         {provide: CONFIG, useValue: outcomesChartConfig},
 
       ],
@@ -71,34 +49,60 @@ describe('OutcomesComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(OutcomesComponent);
     component = fixture.componentInstance;
-    accountingService = TestBed.inject(AccountingService);
-    dialog = TestBed.inject(MatDialog);
     fixture.detectChanges();
+    jest.clearAllMocks();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render app-vertical-bar', () => {
 
+  it('should call OutcomesDialogComponent.openDialog when handleOpenDialog is called', () => {
     // given
-    // when
-    Object.defineProperty(component, 'resultData$', {value: mockData});
+    const serviceSpy = jest.spyOn(OutcomesDialogComponent, 'openDialog')
+    //   when
+    component.handleOpenDialog(mockData)
     // then
-    fixture.detectChanges();
-
-    const verticalBarElement = fixture.nativeElement.querySelector('app-vertical-bar');
-    expect(verticalBarElement).toBeDefined();
+    expect(serviceSpy).toHaveBeenCalled();
   })
 
-  it('should fetch incomes data on initialization', () => {
-    // given
-    jest.spyOn(accountingService, 'fetchOutcomesData');
-    // when
-    component.ngOnInit();
-    // then
-    expect(component.resultData$.subscribe(data => data)).toEqual((mockData.subscribe(data => data)));
-  });
 
 });
+
+
+describe('on init tests', () => {
+  let component: OutcomesComponent;
+  let fixture: ComponentFixture<OutcomesComponent>;
+  const accountingServiceMock = {
+    fetchOutcomesData: jest.fn(),
+    registerNewOutcome: jest.fn()
+  };
+  beforeEach((() => {
+    TestBed.configureTestingModule({
+      declarations: [OutcomesComponent, OutcomesDialogComponent],
+      imports: [MatDialogModule],
+      providers: [
+        {provide: AccountingService, useValue: accountingServiceMock},
+        {provide: MatDialog, useValue: {}},
+        {provide: CONFIG, useValue: outcomesChartConfig},
+
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    })
+      .compileComponents();
+  }));
+
+  it('it should call fetchOutcomesData on Init', () => {
+    fixture = TestBed.createComponent(OutcomesComponent);
+    component = fixture.componentInstance;
+
+    // accountingService = TestBed.inject(AccountingService);
+    const spy = jest.spyOn(accountingServiceMock, 'fetchOutcomesData')
+    fixture.detectChanges();
+
+    expect(spy).toHaveBeenCalled();
+  })
+
+})
+

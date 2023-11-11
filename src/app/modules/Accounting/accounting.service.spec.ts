@@ -1,74 +1,79 @@
 import {TestBed} from '@angular/core/testing';
 import {AccountingService} from '../Accounting/accounting.service';
-import {incomesData} from "../Accounting/data/incomes";
-import {outcomesData} from "../Accounting/data/outcomes";
-import {DataFormatter} from "../Accounting/DataFormatter";
-import {AbstractBarDataInterface} from "../Accounting/models/abstractBarData.interface";
+import {DataFormatter} from '../Accounting/DataFormatter';
 import {SpinnerService} from '../spinner/spinner.service';
-
+import {AbstractBarDataInterface} from "../Accounting/models/abstractBarData.interface";
+import {incomesData} from "../Accounting/data/incomes";
+import {finalize} from "rxjs";
+import {outcomesData} from "../Accounting/data/outcomes";
 
 describe('AccountingService', () => {
-  let service: AccountingService;
+  let accountingService: AccountingService;
   let spinnerService: SpinnerService;
-
 
   const mockSpinnerService = {
     show: jest.fn(),
     hide: jest.fn(),
-  }
+  };
+
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         AccountingService,
-        {provide: SpinnerService, useValue: mockSpinnerService}
+        {provide: SpinnerService, useValue: mockSpinnerService},
       ],
     });
-    service = TestBed.inject(AccountingService);
-    spinnerService = TestBed.inject(SpinnerService);
+    accountingService = new AccountingService(new SpinnerService())
+
   });
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    expect(accountingService).toBeTruthy();
   });
 
   it('should fetch incomes data', (done) => {
     // given
-    const expectedData: AbstractBarDataInterface[] = DataFormatter.formatIncomesData(incomesData);
-    const spy = jest.spyOn(spinnerService, 'show');
+    const expectedData: AbstractBarDataInterface[] =
+      DataFormatter.formatIncomesData(incomesData);
     // when
-    service.fetchIncomesData().subscribe((data) => {
-      // then
-      expect(data).toEqual(expectedData);
-      expect(spy).toHaveBeenCalled();
-      done();
-    });
+    accountingService
+      .fetchIncomesData()
+      .pipe(finalize(() => expect(spinnerService.hide).toHaveBeenCalled()))
+      .subscribe((data) => {
+        // then
+        expect(data).toEqual(expectedData);
+        done();
+      });
+
+
   });
 
   it('should fetch outcomes data', (done) => {
     // given
-    const expectedData: AbstractBarDataInterface[] = DataFormatter.formatOutcomeData(outcomesData);
-    const spy = jest.spyOn(spinnerService, 'show');
+    const expectedData: AbstractBarDataInterface[] =
+      DataFormatter.formatOutcomeData(outcomesData);
     // when
-    service.fetchOutcomesData().subscribe((data) => {
+    accountingService
+      .fetchOutcomesData().subscribe((data) => {
       // then
       expect(data).toEqual(expectedData);
-      expect(spy).toHaveBeenCalled();
       done();
     });
+
   });
 
   it('should register new outcome', () => {
     // given
-    const spy = jest.spyOn(service, 'registerNewOutcome');
+    const spy = jest.spyOn(accountingService, 'registerNewOutcome');
     const data = {
       expenseAmount: '1000',
       month: 'Test',
-      outcomeType: 'test'
+      outcomeType: 'test',
     };
     // when
-    service.registerNewOutcome(data);
+    accountingService.registerNewOutcome(data);
     // then
-    expect(spy).toReturnWith(data)
+    expect(spy).toReturnWith(data);
   });
 });

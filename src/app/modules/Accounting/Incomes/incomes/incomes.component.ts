@@ -1,56 +1,51 @@
-import {Component, OnInit} from '@angular/core';
-import {AccountingService} from '../../accounting.service';
-import {CONFIG} from "../../../shared/CONFIG";
-import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {CustomDialogComponent} from "../../../Accounting/Dialogs/custom-dialog/custom-dialog.component";
-import {Observable} from "rxjs";
-import {incomesChartConfig} from "../../../Accounting/Incomes/incomesChartConfig";
-import {AbstractBarDataInterface} from "../../../Accounting/models/abstractBarData.interface";
-import {ActivateDataInterface} from "@app/modules/shared/activateData.interface";
-
+import { Component, OnInit } from '@angular/core';
+import { AccountingService } from '../../accounting.service';
+import { CONFIG } from '../../../shared/CONFIG';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { CustomDialogComponent } from '../../../Accounting/Dialogs/custom-dialog/custom-dialog.component';
+import { Observable } from 'rxjs';
+import { incomesChartConfig } from '../../../Accounting/Incomes/incomesChartConfig';
+import { AbstractBarDataInterface } from '../../../Accounting/models/abstractBarData.interface';
+import { ActivateDataInterface } from '@app/modules/shared/activateData.interface';
 
 @Component({
   selector: 'app-incomes',
   templateUrl: './incomes.component.html',
   styleUrls: ['./incomes.component.css'],
-  providers: [{provide: CONFIG, useValue: incomesChartConfig}]
-
+  providers: [{ provide: CONFIG, useValue: incomesChartConfig }],
 })
 export class IncomesComponent implements OnInit {
-  incomeData$: Observable<AbstractBarDataInterface[]> = this.accountingService.fetchIncomesData();
-  dialogRef!: MatDialogRef<CustomDialogComponent, {
-    data: {
-      data: AbstractBarDataInterface[]
-    },
-    hasBackdrop: boolean,
-    position: { [key: string]: string }
-  }>
-
+  incomeData$: Observable<AbstractBarDataInterface[]> =
+    this.accountingService.fetchIncomesData();
+  dialogRef!: MatDialogRef<
+    CustomDialogComponent,
+    {
+      data: {
+        data: AbstractBarDataInterface[];
+      };
+      hasBackdrop: boolean;
+      position: { [key: string]: string };
+    }
+  >;
 
   constructor(
     private accountingService: AccountingService,
-    private dialog: MatDialog,
-  ) {
-  }
+    private dialog: MatDialog
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onActivate(event: ActivateDataInterface) {
-    console.log(event)
-
     const dataToDisplay = event.value.extra;
-
 
     this.dialogRef = this.dialog.open(CustomDialogComponent, {
       hasBackdrop: false,
-      position: {top: '10%'},
+      position: { top: '10%' },
       data: {
         data: dataToDisplay,
-      }
-    })
+      },
+    });
   }
-
 
   onDeactivate(event: ActivateDataInterface) {
     if (!event) {
@@ -59,4 +54,3 @@ export class IncomesComponent implements OnInit {
     this.dialogRef.close();
   }
 }
-

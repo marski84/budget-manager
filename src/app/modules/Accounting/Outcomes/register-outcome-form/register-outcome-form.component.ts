@@ -4,6 +4,7 @@ import {AccountingService} from "../../../Accounting/accounting.service";
 import {newOutcome} from "@app/modules/Accounting/models/outcomesData.interface";
 import {MONTHS} from "@app/modules/Accounting/Outcomes/months.enum";
 import {ExpenseFormInterface} from "@app/modules/Accounting/models/ExpenseFormInterface";
+import { RegisterOutcomeForm } from './register-outcome-form';
 
 @Component({
   selector: 'app-register-outcome-form',
@@ -14,12 +15,8 @@ export class RegisterOutcomeFormComponent implements OnInit {
   @Output() formDataEmitted: EventEmitter<newOutcome> = new EventEmitter()
   @Input() selectedMonth?: string
 
-  months = MONTHS
-  form: FormGroup<ExpenseFormInterface> = this.fb.group({
-    month: ['', [Validators.required]],
-    outcomeType: ['', [Validators.required]],
-    expenseAmount: ['', [Validators.required]]
-  })
+  months = MONTHS;
+  form = RegisterOutcomeForm.create();
 
   constructor(private fb: NonNullableFormBuilder, private accountingService: AccountingService) {
   }
@@ -28,8 +25,10 @@ export class RegisterOutcomeFormComponent implements OnInit {
     if (!this.selectedMonth) {
       return;
     }
+    this.form.controls.valueChanges.subscribe(() => ) // <= zmieniamy sobie formularz
     this.form.controls.month.setValue(this.selectedMonth);
     this.form.controls.month.disable();
+    this.form.reactToTypeChange();
   }
 
   handleSubmit() {

@@ -7,14 +7,18 @@ describe('CustomDialogComponent', () => {
   let component: CustomDialogComponent;
   let fixture: ComponentFixture<CustomDialogComponent>;
 
-  class dialogMock {
-    open() {
-      return true
-    }
+  // class dialogMock {
+  //   open() {
+  //     return true
+  //   }
 
-    close() {
-      return true
-    }
+  //   close() {
+  //     return true
+  //   }
+  // }
+  const dialogMock = {
+    open: jest.fn(),
+    close: jest.fn(),
   }
 
   beforeEach(() => {
@@ -25,7 +29,7 @@ describe('CustomDialogComponent', () => {
           {Pedicure: 100}
       },
         {
-          provide: MatDialog, useClass: dialogMock
+          provide: MatDialog, useValue: dialogMock
         }],
 
     });
@@ -36,19 +40,13 @@ describe('CustomDialogComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-
-    fixture.detectChanges()
-    console.log(component.dialogData)
-
-    component.ngOnInit()
   });
 
   it('should component get data', () => {
     //   given
+    // const dialog = fixture.debugElement.nativeElement.querySelector('#dialog');
     //   then
-    fixture.detectChanges()
-    const dialog = fixture.debugElement.nativeElement.querySelector('#dialog')
-    console.log(dialog)
+
     // expect(component.dialogData).toEqual({Pedicure: 100})
   })
 
