@@ -1,53 +1,36 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {CustomDialogComponent} from './custom-dialog.component';
-import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {RecordDataPipe} from "../../../Accounting/RecordData.pipe";
 
 describe('CustomDialogComponent', () => {
   let component: CustomDialogComponent;
   let fixture: ComponentFixture<CustomDialogComponent>;
 
-  // class dialogMock {
-  //   open() {
-  //     return true
-  //   }
-
-  //   close() {
-  //     return true
-  //   }
-  // }
-  const dialogMock = {
-    open: jest.fn(),
-    close: jest.fn(),
-  }
-
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CustomDialogComponent],
-      providers: [{
-        provide: MAT_DIALOG_DATA, useValue:
-          {Pedicure: 100}
-      },
+      declarations: [CustomDialogComponent, RecordDataPipe],
+      providers: [
         {
-          provide: MatDialog, useValue: dialogMock
-        }],
+          provide: MAT_DIALOG_DATA, useValue: ''
+        },
+      ],
 
     });
     fixture = TestBed.createComponent(CustomDialogComponent);
     component = fixture.componentInstance;
+    component.dialogData = [{Pedicure: 500}];
     fixture.detectChanges();
+
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should component get data', () => {
-    //   given
-    // const dialog = fixture.debugElement.nativeElement.querySelector('#dialog');
-    //   then
-
-    // expect(component.dialogData).toEqual({Pedicure: 100})
+  it('should component get dialogData on init', () => {
+    expect(component.dialogData).toEqual([{Pedicure: 500}])
   })
 
 
