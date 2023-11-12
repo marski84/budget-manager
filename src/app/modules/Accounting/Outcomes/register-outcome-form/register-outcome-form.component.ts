@@ -1,10 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormGroup, NonNullableFormBuilder, Validators} from "@angular/forms";
-import {AccountingService} from "../../../Accounting/accounting.service";
-import {newOutcome} from "@app/modules/Accounting/models/outcomesData.interface";
-import {MONTHS} from "@app/modules/Accounting/Outcomes/months.enum";
-import {ExpenseFormInterface} from "@app/modules/Accounting/models/ExpenseFormInterface";
-import { RegisterOutcomeForm } from './register-outcome-form';
+import {FormControl} from "@angular/forms";
+import {newOutcome} from "../../../Accounting/models/outcomesData.interface";
+import {MONTHS} from "../months.enum";
+import {RegisterOutcomeForm} from './register-outcome-form';
 
 @Component({
   selector: 'app-register-outcome-form',
@@ -16,29 +14,41 @@ export class RegisterOutcomeFormComponent implements OnInit {
   @Input() selectedMonth?: string
 
   months = MONTHS;
-  form = RegisterOutcomeForm.create();
+  form: RegisterOutcomeForm = RegisterOutcomeForm.create();
 
-  constructor(private fb: NonNullableFormBuilder, private accountingService: AccountingService) {
+  constructor(
+    // private fb: NonNullableFormBuilder,
+    // private accountingService: AccountingService
+  ) {
+  }
+
+  get monthCtrl() {
+    return this.form.controls['month'] as FormControl
+  }
+
+  get expenseAmountCtrl() {
+    return this.form.controls['expenseAmount'] as FormControl
+  }
+
+  get outcomeTypeCtrl() {
+    return this.form.controls['outcomeType'] as FormControl
   }
 
   ngOnInit(): void {
     if (!this.selectedMonth) {
       return;
     }
-    this.form.controls.valueChanges.subscribe(() => ) // <= zmieniamy sobie formularz
-    this.form.controls.month.setValue(this.selectedMonth);
-    this.form.controls.month.disable();
-    this.form.reactToTypeChange();
+    this.form.reactToMonthChange(this.selectedMonth);
   }
 
   handleSubmit() {
-    if (this.form.invalid) {
+    if (!this.form.valid) {
       return
     }
 
     this.formDataEmitted.emit(this.form.getRawValue());
-    this.form.controls.outcomeType.setValue('');
-    this.form.controls.expenseAmount.setValue('');
+    this.outcomeTypeCtrl.setValue('');
+    this.expenseAmountCtrl.setValue('');
     this.form.markAsPristine();
   }
 }

@@ -1,7 +1,7 @@
-import { FormControl } from '@angular/forms';
+import {FormControl} from '@angular/forms';
 
 export type ExpenseFormInterface = {
-  month: FormControl<string>;
-  outcomeType: FormControl<string>;
-  expenseAmount: FormControl<string>;
+  month: FormControl<string | null>;
+  outcomeType: FormControl<string | null>;
+  expenseAmount: FormControl<string | null>;
 }
